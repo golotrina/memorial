@@ -652,18 +652,18 @@ function initGalleries() {
     if (!container) return;
     container.innerHTML = '';
     window.DB_GALLERIES[galId].forEach(item => {
-      const text = currentLang === 'ua' ? item.ua : item.ru;
+      const text = currentLang === 'ua' ? item.ua : (currentLang === 'en' ? item.en : item.ru);
       const wrap = document.createElement('div');
       wrap.className = 'gallery-item-wrap';
       wrap.innerHTML = `
         <div class="gallery-item" onclick="openLightbox(this)">
           <img id="${item.id}" src="img/${item.id}.webp" alt="Фото" loading="lazy">
-          <button class="move-photo-btn move-photo-left" onclick="moveGalleryPhoto(this, -1); event.stopPropagation();" data-title-ru="Сдвинуть влево" data-title-ua="Зсунути ліворуч" title="${getT('Зсунути ліворуч', 'Move left', 'Сдвинуть влево')}">&#10094;</button>
-          <button class="move-photo-btn move-photo-right" onclick="moveGalleryPhoto(this, 1); event.stopPropagation();" data-title-ru="Сдвинуть вправо" data-title-ua="Зсунути праворуч" title="${getT('Зсунути праворуч', 'Move right', 'Сдвинуть вправо')}">&#10095;</button>
+          <button class="move-photo-btn move-photo-left" onclick="moveGalleryPhoto(this, -1); event.stopPropagation();" data-title-ru="Сдвинуть влево" data-title-ua="Зсунути ліворуч" data-title-en="Move left" title="${getT('Зсунути ліворуч', 'Move left', 'Сдвинуть влево')}">&#10094;</button>
+          <button class="move-photo-btn move-photo-right" onclick="moveGalleryPhoto(this, 1); event.stopPropagation();" data-title-ru="Сдвинуть вправо" data-title-ua="Зсунути праворуч" data-title-en="Move right" title="${getT('Зсунути праворуч', 'Move right', 'Сдвинуть вправо')}">&#10095;</button>
           <button class="edit-photo-btn" onclick="triggerUpload('${item.id}'); event.stopPropagation();">📷 Загрузить</button>
-          <button class="delete-photo-btn" onclick="deleteGalleryPhoto(this); event.stopPropagation();" data-title-ru="Удалить" data-title-ua="Видалити" title="${getT('Видалити', 'Delete', 'Удалить')}">🗑️</button>
+          <button class="delete-photo-btn" onclick="deleteGalleryPhoto(this); event.stopPropagation();" data-title-ru="Удалить" data-title-ua="Видалити" data-title-en="Delete" title="${getT('Видалити', 'Delete', 'Удалить')}">🗑️</button>
         </div>
-        <div class="gallery-caption editable-text" contenteditable="false" data-placeholder-ru="Добавить подпись..." data-placeholder-ua="Додати підпис..." data-ru="${item.ru}" data-ua="${item.ua}">${text}</div>
+        <div class="gallery-caption editable-text" contenteditable="false" data-placeholder-ru="Добавить подпись..." data-placeholder-ua="Додати підпис..." data-placeholder-en="Add caption..." data-ru="${item.ru}" data-ua="${item.ua}" data-en="${item.en || ''}">${text}</div>
       `;
       container.appendChild(wrap);
     });
@@ -720,9 +720,9 @@ function addGalleryPhoto(galleryId) {
       <button class="move-photo-btn move-photo-left" onclick="moveGalleryPhoto(this, -1); event.stopPropagation();" data-title-ru="Сдвинуть влево" data-title-ua="Зсунути ліворуч" title="${getT('Зсунути ліворуч', 'Move left', 'Сдвинуть влево')}">&#10094;</button>
       <button class="move-photo-btn move-photo-right" onclick="moveGalleryPhoto(this, 1); event.stopPropagation();" data-title-ru="Сдвинуть вправо" data-title-ua="Зсунути праворуч" title="${getT('Зсунути праворуч', 'Move right', 'Сдвинуть вправо')}">&#10095;</button>
       <button class="edit-photo-btn" onclick="triggerUpload('${newId}'); event.stopPropagation();">📷 Загрузить</button>
-      <button class="delete-photo-btn" onclick="deleteGalleryPhoto(this); event.stopPropagation();" data-title-ru="Удалить" data-title-ua="Видалити" title="${getT('Видалити', 'Delete', 'Удалить')}">🗑️</button>
+      <button class="delete-photo-btn" onclick="deleteGalleryPhoto(this); event.stopPropagation();" data-title-ru="Удалить" data-title-ua="Видалити" data-title-en="Delete" title="${getT('Видалити', 'Delete', 'Удалить')}">🗑️</button>
     </div>
-    <div class="gallery-caption editable-text" contenteditable="${isAdm}" data-placeholder="${getT('Додати підпис...', 'Add caption...', 'Добавить подпись...')}" data-placeholder-ru="Добавить подпись..." data-placeholder-ua="Додати підпис..." data-ru="" data-ua=""></div>
+    <div class="gallery-caption editable-text" contenteditable="${isAdm}" data-placeholder="${getT('Додати підпис...', 'Add caption...', 'Добавить подпись...')}" data-placeholder-ru="Добавить подпись..." data-placeholder-ua="Додати підпис..." data-placeholder-en="Add caption..." data-ru="" data-ua="" data-en=""></div>
   `;
   gallery.appendChild(wrap);
   updateGalleryVisibility(galleryId);
@@ -748,7 +748,7 @@ function openLightbox(wrapper) {
   if (caption) {
     if (img.id === 'photo-crest') {
       caption.style.display = 'block';
-      caption.innerText = currentLang === 'ua' ? caption.getAttribute('data-ua') : caption.getAttribute('data-ru');
+      caption.innerText = caption.getAttribute(`data-${currentLang}`) || caption.getAttribute('data-ua');
     } else {
       caption.style.display = 'none';
     }

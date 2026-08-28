@@ -774,7 +774,7 @@ window.DB_GALLERIES = {
       "id": "gallery-f-1780044314459",
       "ru": "Григорий Карпович, папа",
       "ua": "Григорій Карпович, тато",
-      "en": "Grigory Karpovich, dad"
+      "en": "Grigory Karpovich, father"
     },
     {
       "id": "gallery-f-1780044317053",
@@ -804,7 +804,7 @@ window.DB_GALLERIES = {
       "id": "gallery-f-1779900681823",
       "ru": "Дочка Таня – гроза хулиганов в саду",
       "ua": "Дочка Таня – гроза хуліганів у саду",
-      "en": "Daughter Tanya is a thunderstorm of hooligans in the garden"
+      "en": "Daughter Tanya – the terror of the kindergarten bullies"
     },
     {
       "id": "gallery-f-1781891842798",
@@ -864,7 +864,7 @@ window.DB_GALLERIES = {
       "id": "gallery-f-1779900617232",
       "ru": "Внук Игореша",
       "ua": "Онук Ігорьоша",
-      "en": "Grandson of Igoresh"
+      "en": "Grandson Igoresha"
     },
     {
       "id": "gallery-f-1779900728388",
@@ -876,7 +876,7 @@ window.DB_GALLERIES = {
       "id": "gallery-f-1780044304340",
       "ru": "Папа в Филармонии",
       "ua": "Папа у Філармонії",
-      "en": "Pope at the Philharmonic"
+      "en": "Dad at the Philharmonic"
     },
     {
       "id": "gallery-f-1780045556917",
@@ -908,7 +908,7 @@ window.DB_GALLERIES = {
       "id": "gallery-m-1780045033642",
       "ru": "Владимир Николаевич, папа",
       "ua": "Володимир Миколайович, тато",
-      "en": "Vladimir Nikolaevich, dad"
+      "en": "Vladimir Nikolaevich, father"
     },
     {
       "id": "gallery-m-1780045034779",
@@ -968,7 +968,7 @@ window.DB_GALLERIES = {
       "id": "gallery-m-1779900307645",
       "ru": "Гипроплодоовощхоз",
       "ua": "Гіпроплодоовочгосп",
-      "en": "Gipropodoovoshchoz"
+      "en": "Giproplodoovoshchkhoz"
     },
     {
       "id": "gallery-m-1779900348033",
@@ -1034,7 +1034,7 @@ window.DB_GALLERIES = {
       "id": "gallery-m-1779900436270",
       "ru": "Внук Игореша",
       "ua": "Онучок Ігорьоша",
-      "en": "Grandson of Igoresh"
+      "en": "Grandson Igoresha"
     },
     {
       "id": "gallery-m-1780044949641",
