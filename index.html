@@ -35,32 +35,33 @@
       </button>
 
       <nav class="control-pill desktop-nav nav-padding">
-        <a href="#parents" class="nav-link editable-text" data-ru="Родители" data-ua="Батьки"
+        <a href="#parents" class="nav-link editable-text" data-ru="Родители" data-ua="Батьки" data-en="Parents"
           contenteditable="false">Батьки</a>
-        <a href="#timeline" class="nav-link editable-text" data-ru="Линия жизни" data-ua="Лінія життя"
+        <a href="#timeline" class="nav-link editable-text" data-ru="Линия жизни" data-ua="Лінія життя" data-en="Timeline"
           contenteditable="false">Лінія життя</a>
-        <a href="#timeline" class="nav-link editable-text" data-ru="Эпоха 1942-2022" data-ua="Епоха 1942-2022"
+        <a href="#timeline" class="nav-link editable-text" data-ru="Эпоха 1942-2022" data-ua="Епоха 1942-2022" data-en="Epoch 1942-2022"
           contenteditable="false">Епоха 1942-2022</a>
-        <a href="#ritual" class="nav-link editable-text" data-ru="Свеча Памяти" data-ua="Свічка Пам'яті"
+        <a href="#ritual" class="nav-link editable-text" data-ru="Свеча Памяти" data-ua="Свічка Пам'яті" data-en="Candle of Memory"
           contenteditable="false">Свічка Пам'яті</a>
         <button class="zoom-btn" onclick="shareSite()" data-title-ru="Поделиться ссылкой"
-          data-title-ua="Поділитися посиланням" title="Поділитися посиланням" aria-label="Поделиться ссылкой"><span
+          data-title-ua="Поділитися посиланням" data-title-en="Share Link" title="Поділитися посиланням" aria-label="Поделиться ссылкой"><span
             class="icon-3d">🔗</span></button>
       </nav>
 
       <div class="control-pill">
-        <button class="zoom-btn" onclick="changeZoom(-2)" data-title-ru="Уменьшить шрифт" data-title-ua="Зменшити шрифт"
+        <button class="zoom-btn" onclick="changeZoom(-2)" data-title-ru="Уменьшить шрифт" data-title-ua="Зменшити шрифт" data-title-en="Decrease Font Size"
           title="Зменшити шрифт" aria-label="Уменьшить шрифт">A−</button>
         <span class="zoom-value" id="zoomValueDisplay">100%</span>
-        <button class="zoom-btn" onclick="changeZoom(2)" data-title-ru="Увеличить шрифт" data-title-ua="Збільшити шрифт"
+        <button class="zoom-btn" onclick="changeZoom(2)" data-title-ru="Увеличить шрифт" data-title-ua="Збільшити шрифт" data-title-en="Increase Font Size"
           title="Збільшити шрифт" aria-label="Увеличить шрифт">A+</button>
         <button class="zoom-btn theme-toggle-btn" onclick="toggleTheme()" data-title-ru="Светлая тема"
-          data-title-ua="Світла тема" title="Світла тема" aria-label="Переключить тему">
+          data-title-ua="Світла тема" data-title-en="Light Theme" title="Світла тема" aria-label="Переключить тему">
           <span class="icon-3d" id="theme-icon">☀️</span>
         </button>
       </div>
       <div class="control-pill">
         <button class="lang-btn" id="btn-lang-ua" onclick="setLang('ua')">🌐 UA</button>
+        <button class="lang-btn" id="btn-lang-en" onclick="setLang('en')">🌐 EN</button>
         <button class="lang-btn" id="btn-lang-ru" onclick="setLang('ru')">🌐 RU</button>
       </div>
     </div>
@@ -104,12 +105,12 @@
     <div class="ritual-header">
       <h2>
         <span class="icon-3d title-candle-glow">🕯️</span>
-        <span class="editable-text" data-ru="Ритуал зажжения свечи памяти" data-ua="Ритуал запалювання свічки пам'яті"
+        <span class="editable-text" data-ru="Ритуал зажжения свечи памяти" data-ua="Ритуал запалювання свічки пам'яті" data-en="Candle Lighting Ritual"
           contenteditable="false">Ритуал запалювання свічки пам'яті</span>
       </h2>
       <p class="editable-text"
         data-ru="Каждое доброе слово – это невидимый огонек, согревающий сквозь холод утраты.<br>Зажгите свечу и поделитесь воспоминанием.<br>Пусть свет нашей памяти продолжает согревать их души."
-        data-ua="Кожне добре слово – це невидимий вогник, що зігріває крізь холод втрати.<br>Запаліть свічку та поділіться спогадом.<br>Нехай світло нашої пам'яті продовжує зігрівати їхні душі."
+        data-ua="Кожне добре слово – це невидимий вогник, що зігріває крізь холод втрати.<br>Запаліть свічку та поділіться спогадом.<br>Нехай світло нашої пам'яті продовжує зігрівати їхні душі." data-en="Every kind word is an invisible flame warming through the cold of loss.<br>Light a candle and share a memory.<br>Let the light of our memory continue to warm their souls."
         contenteditable="false">Кожне добре слово – це невидимий вогник, що зігріває крізь холод втрати.<br>Запаліть
         свічку та поділіться спогадом.<br>Нехай світло нашої пам'яті продовжує зігрівати їхні душі.</p>
     </div>
@@ -122,14 +123,14 @@
 
     <div id="openFormBtnWrapper" class="fade-up visible btn-center-margin-large">
       <button class="submit-btn" onclick="toggleCandleForm()"><span class="editable-text" data-ru="Зажечь свечу памяти"
-          data-ua="Запалити свічку пам'яті" contenteditable="false">Запалити свічку пам'яті</span></button>
+          data-ua="Запалити свічку пам'яті" data-en="Light a Candle of Memory" contenteditable="false">Запалити свічку пам'яті</span></button>
     </div>
 
     <div class="candle-form-wrapper" id="candleFormWrapper">
       <div class="candle-form-inner">
         <div class="candle-form-container">
           <div class="form-title"><span class="icon-3d">✨</span> <span id="formTitleTag" class="editable-text"
-              data-ru="НОВАЯ ТИХАЯ СВЕЧА" data-ua="НОВА ТИХА СВІЧКА" contenteditable="false">НОВА ТИХА СВІЧКА</span>
+              data-ru="НОВАЯ ТИХАЯ СВЕЧА" data-ua="НОВА ТИХА СВІЧКА" data-en="NEW SILENT CANDLE" contenteditable="false">НОВА ТИХА СВІЧКА</span>
           </div>
 
           <form id="candleForm" method="POST" onsubmit="handleCandleSubmit(event)">
@@ -137,56 +138,56 @@
               <div class="input-group">
                 <label><span class="icon-3d">👤</span> <span class="editable-text"
                     data-ru="КТО ЗАЖИГАЕТ (НАПРИМЕР: ДРУГ СЕМЬИ ОЛЕГ, ВНУК)"
-                    data-ua="ХТО ЗАПАЛЮЄ (НАПРИКЛАД: ДРУГ ОЛЕГ, ОНУК)" contenteditable="false">ХТО ЗАПАЛЮЄ (НАПРИКЛАД:
+                    data-ua="ХТО ЗАПАЛЮЄ (НАПРИКЛАД: ДРУГ ОЛЕГ, ОНУК)" data-en="WHO LIGHTS IT (E.G., FRIEND OLEG, GRANDSON)" contenteditable="false">ХТО ЗАПАЛЮЄ (НАПРИКЛАД:
                     ДРУГ ОЛЕГ, ОНУК)</span></label>
                 <input type="text" name="name" id="cName" required="" placeholder="Наприклад: Друг Олег, онук"
-                  data-placeholder-ru="Например: Друг Олег, внук" data-placeholder-ua="Наприклад: Друг Олег, онук">
+                  data-placeholder-ru="Например: Друг Олег, внук" data-placeholder-ua="Наприклад: Друг Олег, онук" data-placeholder-en="E.g.: Friend Oleg, grandson">
               </div>
               <div class="input-group">
                 <label><span class="icon-3d">📝</span> <span class="editable-text"
-                    data-ru="СЛОВА ПАМЯТИ (НЕОБЯЗАТЕЛЬНО)" data-ua="СЛОВА ПАМ'ЯТІ (НЕОБОВ'ЯЗКОВО)"
+                    data-ru="СЛОВА ПАМЯТИ (НЕОБЯЗАТЕЛЬНО)" data-ua="СЛОВА ПАМ'ЯТІ (НЕОБОВ'ЯЗКОВО)" data-en="WORDS OF MEMORY (OPTIONAL)"
                     contenteditable="false">СЛОВА ПАМ'ЯТІ (НЕОБОВ'ЯЗКОВО)</span></label>
                 <textarea name="message" id="cMessage" rows="2"
                   placeholder="Наприклад: Пам'ятаю, люблю, дякую за все..."
                   data-placeholder-ru="Например: Помню, люблю, благодарю за всё..."
-                  data-placeholder-ua="Наприклад: Пам'ятаю, люблю, дякую за все..."></textarea>
+                  data-placeholder-ua="Наприклад: Пам'ятаю, люблю, дякую за все..." data-placeholder-en="E.g.: I remember, I love, thank you for everything..."></textarea>
               </div>
             </div>
 
-            <div class="types-title editable-text" data-ru="ВЫБЕРИТЕ ОБРАЗ СВЕЧИ" data-ua="ОБЕРІТЬ ОБРАЗ СВІЧКИ"
+            <div class="types-title editable-text" data-ru="ВЫБЕРИТЕ ОБРАЗ СВЕЧИ" data-ua="ОБЕРІТЬ ОБРАЗ СВІЧКИ" data-en="CHOOSE CANDLE DESIGN"
               contenteditable="false">ОБЕРІТЬ ОБРАЗ СВІЧКИ</div>
             <div class="candle-types">
               <label class="type-label"><input type="radio" name="cType" value="classic" checked="">
                 <div class="type-card">
                   <div class="sphere-3d sphere-classic"></div><strong class="editable-text" data-ru="Свеча памяти"
-                    data-ua="Свічка пам'яті" contenteditable="false">Свічка пам'яті</strong><span class="editable-text"
-                    data-ru="Тихий, классический огонек светлой тоски." data-ua="Тихий, класичний вогник світлої туги."
+                    data-ua="Свічка пам'яті" data-en="Candle of Memory" contenteditable="false">Свічка пам'яті</strong><span class="editable-text"
+                    data-ru="Тихий, классический огонек светлой тоски." data-ua="Тихий, класичний вогник світлої туги." data-en="A quiet, classic flame of bright longing."
                     contenteditable="false">Тихий, класичний вогник світлої туги.</span>
                 </div>
               </label>
               <label class="type-label"><input type="radio" name="cType" value="amber">
                 <div class="type-card">
                   <div class="sphere-3d sphere-amber"></div><strong class="editable-text" data-ru="Янтарный свет"
-                    data-ua="Бурштинове світло" contenteditable="false">Бурштинове світло</strong><span
+                    data-ua="Бурштинове світло" data-en="Amber Light" contenteditable="false">Бурштинове світло</strong><span
                     class="editable-text" data-ru="Глубокий золотой свет уютного домашнего тепла."
-                    data-ua="Глибоке золоте світло затишного домашнього тепла." contenteditable="false">Глибоке золоте
+                    data-ua="Глибоке золоте світло затишного домашнього тепла." data-en="Deep golden light of cozy home warmth." contenteditable="false">Глибоке золоте
                     світло затишного домашнього тепла.</span>
                 </div>
               </label>
               <label class="type-label"><input type="radio" name="cType" value="heavenly">
                 <div class="type-card">
                   <div class="sphere-3d sphere-heavenly"></div><strong class="editable-text" data-ru="Небесное сияние"
-                    data-ua="Небесне сяйво" contenteditable="false">Небесне сяйво</strong><span class="editable-text"
-                    data-ru="Мягкий свет вечного душевного покоя." data-ua="М'яке світло вічного душевного спокою."
+                    data-ua="Небесне сяйво" data-en="Heavenly Radiance" contenteditable="false">Небесне сяйво</strong><span class="editable-text"
+                    data-ru="Мягкий свет вечного душевного покоя." data-ua="М'яке світло вічного душевного спокою." data-en="Soft light of eternal peace of mind."
                     contenteditable="false">М'яке світло вічного душевного спокою.</span>
                 </div>
               </label>
               <label class="type-label"><input type="radio" name="cType" value="unquenchable">
                 <div class="type-card">
                   <div class="sphere-3d sphere-unquenchable"></div><strong class="editable-text"
-                    data-ru="Неугасаемое пламя" data-ua="Незгасне полум'я" contenteditable="false">Незгасне
+                    data-ru="Неугасаемое пламя" data-ua="Незгасне полум'я" data-en="Unquenchable Flame" contenteditable="false">Незгасне
                     полум'я</strong><span class="editable-text" data-ru="Яркий свет неугасаемой благодарности."
-                    data-ua="Яскраве світло незгасної вдячності." contenteditable="false">Яскраве світло незгасної
+                    data-ua="Яскраве світло незгасної вдячності." data-en="Bright light of unquenchable gratitude." contenteditable="false">Яскраве світло незгасної
                     вдячності.</span>
                 </div>
               </label>
@@ -194,9 +195,9 @@
 
             <div class="form-actions">
               <button type="button" class="cancel-btn editable-text" onclick="toggleCandleForm()" data-ru="Отмена"
-                data-ua="Скасувати" contenteditable="false">Скасувати</button>
+                data-ua="Скасувати" data-en="Cancel" contenteditable="false">Скасувати</button>
               <button type="submit" class="submit-btn"><span class="editable-text" id="candleSubmitBtn"
-                  data-ru="Зажечь свечу памяти" data-ua="Запалити свічку пам'яті" contenteditable="false">Запалити
+                  data-ru="Зажечь свечу памяти" data-ua="Запалити свічку пам'яті" data-en="Light a Candle of Memory" contenteditable="false">Запалити
                   свічку пам'яті</span></button>
             </div>
           </form>
@@ -230,7 +231,7 @@
       <img id="lightbox-img" src="img/photo-tombstone.webp" alt="Full photo">
       <div id="lightbox-caption" class="lightbox-caption editable-text" contenteditable="false"
         data-ru="Родовой герб семьи Голотриных. Символизирует неразрывное слияние судеб, выносливость и созидательную энергию поколений. Каждая деталь опирается на архивные документы и отражает судьбы предков. Создан как вечный символ памяти."
-        data-ua="Родовий герб родини Голотріних. Символізує нерозривне злиття доль, витривалість та творчу енергію поколінь. Кожна деталь спирається на архівні документи та відображає долі предків. Створений як вічний символ пам'яті."
+        data-ua="Родовий герб родини Голотріних. Символізує нерозривне злиття доль, витривалість та творчу енергію поколінь. Кожна деталь спирається на архівні документи та відображає долі предків. Створений як вічний символ пам'яті." data-en="The family crest of the Golotrin family. It symbolizes the inextricable fusion of destinies, endurance, and the creative energy of generations. Every detail is based on archival documents and reflects the destinies of ancestors. Created as an eternal symbol of memory."
         style="display: none;">Родовой герб семьи Голотриных. Символизирует неразрывное слияние судеб, выносливость и
         созидательную энергию поколений. Каждая деталь опирается на архивные документы и отражает судьбы предков. Создан
         как вечный символ памяти.</div>
@@ -243,16 +244,16 @@
     <div class="footer-content">
       <p class="footer-quote editable-text"
         data-ru="Бесконечно люблю.&#10;Бесконечно благодарю.&#10;Бесконечно прошу прощения.&#10;Ваша Таня (Tanya-Tango)."
-        data-ua="Безмежно люблю.&#10;Безмежно дякую.&#10;Безмежно прошу вибачення.&#10;Ваша Таня (Tanya-Tango)."
+        data-ua="Безмежно люблю.&#10;Безмежно дякую.&#10;Безмежно прошу вибачення.&#10;Ваша Таня (Tanya-Tango)." data-en="I love infinitely.&#10;I thank infinitely.&#10;I ask for forgiveness infinitely.&#10;Yours, Tanya (Tanya-Tango)."
         contenteditable="false">Безмежно люблю.&#10;Безмежно дякую.&#10;Безмежно прошу вибачення.&#10;Ваша Таня
         (Tanya-Tango).</p>
       <div class="footer-separator"></div>
       <div class="footer-bottom">
         <span><span class="secret-trigger" onclick="promptAdmin()" title="">©</span> <span class="editable-text"
             data-ru="2026 Цифровой мемориал памяти семьи Голотриных"
-            data-ua="2026 Цифровий меморіал пам'яті родини Голотріних" contenteditable="false">2026 Цифровий меморіал
+            data-ua="2026 Цифровий меморіал пам'яті родини Голотріних" data-en="2026 Digital Memorial of the Golotrin Family" contenteditable="false">2026 Цифровий меморіал
             пам'яті родини Голотріних</span></span>
-        <span class="editable-text" data-ru="Вечная память светлым людям" data-ua="Світла пам'ять світлим людям"
+        <span class="editable-text" data-ru="Вечная память светлым людям" data-ua="Світла пам'ять світлим людям" data-en="Blessed memory to bright people"
           contenteditable="false">Світла пам'ять світлим людям</span>
       </div>
 
@@ -260,10 +261,10 @@
         <a href="javascript:void(0)"
           onclick="navigator.clipboard.writeText(atob('Z29sb3RyaW5hQGdtYWlsLmNvbQ==')).then(() => showToast(currentLang === 'ua' ? 'Email скопійовано!' : 'Email скопирован!'));"
           class="creator-link" title="Скопіювати Email творця">
-          <span class="editable-text" data-ru="Создатель цифрового наследия" data-ua="Творець цифрового спадку"
+          <span class="editable-text" data-ru="Создатель цифрового наследия" data-ua="Творець цифрового спадку" data-en="Digital Legacy Creator"
             contenteditable="false">Творець цифрового спадку</span>
           <span class="creator-brand">(Digital Legacy Creator)</span>
-          <span class="editable-text" data-ru="Татьяна Голотрина" data-ua="Тетяна Голотріна"
+          <span class="editable-text" data-ru="Татьяна Голотрина" data-ua="Тетяна Голотріна" data-en="Tetiana Golotrina"
             contenteditable="false">Тетяна Голотріна</span>
         </a>
       </div>
@@ -284,12 +285,12 @@
   <div class="qr-modal" id="adminAuthModal">
     <div class="qr-container auth-container">
       <span class="qr-close" onclick="closeAdminAuthModal()">×</span>
-      <h3 class="editable-text auth-title" data-ru="Доступ редактора" data-ua="Доступ редактора"
+      <h3 class="editable-text auth-title" data-ru="Доступ редактора" data-ua="Доступ редактора" data-en="Editor Access"
         contenteditable="false">Доступ редактора</h3>
       <input type="password" id="adminPwdInput" class="qr-input auth-input" placeholder="****">
       <button class="submit-btn auth-btn" onclick="checkAdminPassword()"><span class="editable-text" data-ru="Войти"
-          data-ua="Увійти" contenteditable="false">Увійти</span></button>
-      <p id="adminPwdError" class="editable-text auth-error" data-ru="Неверный пароль!" data-ua="Невірний пароль!"
+          data-ua="Увійти" data-en="Log In" contenteditable="false">Увійти</span></button>
+      <p id="adminPwdError" class="editable-text auth-error" data-ru="Неверный пароль!" data-ua="Невірний пароль!" data-en="Incorrect password!"
         contenteditable="false">Невірний пароль!</p>
     </div>
   </div>
@@ -298,53 +299,53 @@
   <div class="qr-modal" id="settingsModal">
     <div class="qr-container auth-container settings-container">
       <span class="qr-close" onclick="closeSettingsModal()">×</span>
-      <h3 class="editable-text auth-title" data-ru="Настройки сайта" data-ua="Налаштування сайту"
+      <h3 class="editable-text auth-title" data-ru="Настройки сайта" data-ua="Налаштування сайту" data-en="Site Settings"
         contenteditable="false">Налаштування сайту</h3>
 
       <div class="settings-section">
-        <h4 data-ru="GitHub Token (Ключ доступа)" data-ua="GitHub Token (Ключ доступу)">GitHub Token (Ключ доступу)</h4>
+        <h4 data-ru="GitHub Token (Ключ доступа)" data-ua="GitHub Token (Ключ доступу)" data-en="GitHub Token (Access Key)">GitHub Token (Ключ доступу)</h4>
         <input type="password" id="ghTokenInput" class="qr-input auth-input" placeholder="ghp_xxxxxxxxxxxx">
         <p class="settings-hint" data-ru="Сохраняется только в вашем браузере"
-          data-ua="Зберігається тільки у вашому браузері">Зберігається тільки у вашому браузері</p>
+          data-ua="Зберігається тільки у вашому браузері" data-en="Stored only in your browser">Зберігається тільки у вашому браузері</p>
       </div>
 
       <div class="settings-section">
-        <h4 data-ru="Владелец GitHub" data-ua="Власник GitHub">Власник GitHub</h4>
+        <h4 data-ru="Владелец GitHub" data-ua="Власник GitHub" data-en="GitHub Owner">Власник GitHub</h4>
         <input type="text" id="ghOwnerInput" class="qr-input auth-input" placeholder="Например: golotrina">
         <p class="settings-hint" data-ru="Логин аккаунта, где лежит репозиторий"
-          data-ua="Логін акаунту, де лежить репозиторій">Логін акаунту, де лежить репозиторій</p>
+          data-ua="Логін акаунту, де лежить репозиторій" data-en="Account login where the repository is located">Логін акаунту, де лежить репозиторій</p>
       </div>
 
       <div class="settings-section">
-        <h4 data-ru="Название репозитория" data-ua="Назва репозиторію">Назва репозиторію</h4>
+        <h4 data-ru="Название репозитория" data-ua="Назва репозиторію" data-en="Repository Name">Назва репозиторію</h4>
         <input type="text" id="ghRepoInput" class="qr-input auth-input" placeholder="Например: memorial-site">
-        <p class="settings-hint" data-ru="Точное название вашего репозитория" data-ua="Точна назва вашого репозиторію">
+        <p class="settings-hint" data-ru="Точное название вашего репозитория" data-ua="Точна назва вашого репозиторію" data-en="Exact name of your repository">
           Точна назва вашого репозиторію</p>
       </div>
 
       <div class="settings-section">
-        <h4 data-ru="Telegram Bot Token" data-ua="Telegram Bot Token">Telegram Bot Token</h4>
+        <h4 data-ru="Telegram Bot Token" data-ua="Telegram Bot Token" data-en="Telegram Bot Token">Telegram Bot Token</h4>
         <input type="password" id="tgBotTokenInput" class="qr-input auth-input" placeholder="123456789:ABCDefgh...">
-        <p class="settings-hint" data-ru="Токен бота от BotFather" data-ua="Токен бота від BotFather">Токен бота від
+        <p class="settings-hint" data-ru="Токен бота от BotFather" data-ua="Токен бота від BotFather" data-en="Bot token from BotFather">Токен бота від
           BotFather</p>
       </div>
 
       <div class="settings-section">
-        <h4 data-ru="Telegram Chat ID" data-ua="Telegram Chat ID">Telegram Chat ID</h4>
+        <h4 data-ru="Telegram Chat ID" data-ua="Telegram Chat ID" data-en="Telegram Chat ID">Telegram Chat ID</h4>
         <input type="text" id="tgChatIdInput" class="qr-input auth-input" placeholder="123456789">
         <p class="settings-hint" data-ru="Ваш ID в Telegram (через @userinfobot)"
-          data-ua="Ваш ID в Telegram (через @userinfobot)">Ваш ID в Telegram (через @userinfobot)</p>
+          data-ua="Ваш ID в Telegram (через @userinfobot)" data-en="Your Telegram ID (via @userinfobot)">Ваш ID в Telegram (через @userinfobot)</p>
       </div>
 
       <div class="settings-section">
-        <h4 data-ru="Смена пароля админа" data-ua="Зміна пароля адміна">Зміна пароля адміна</h4>
+        <h4 data-ru="Смена пароля админа" data-ua="Зміна пароля адміна" data-en="Change Admin Password">Зміна пароля адміна</h4>
         <input type="password" id="newAdminPwdInput" class="qr-input auth-input" placeholder="Новий пароль">
         <p class="settings-hint" data-ru="Оставьте пустым, если не хотите менять"
-          data-ua="Залиште порожнім, якщо не хочете змінювати">Залиште порожнім, якщо не хочете змінювати</p>
+          data-ua="Залиште порожнім, якщо не хочете змінювати" data-en="Leave empty if you do not want to change">Залиште порожнім, якщо не хочете змінювати</p>
       </div>
 
       <button class="submit-btn auth-btn" onclick="saveSettings()"><span class="editable-text"
-          data-ru="Сохранить настройки" data-ua="Зберегти налаштування" contenteditable="false">Зберегти
+          data-ru="Сохранить настройки" data-ua="Зберегти налаштування" data-en="Save Settings" contenteditable="false">Зберегти
           налаштування</span></button>
     </div>
   </div>
@@ -353,34 +354,34 @@
     <div class="qr-container qr-main-container">
       <span class="qr-close" onclick="closeQrModal()">×</span>
 
-      <h2 class="qr-title editable-text qr-title-main" data-ru="Табличка с QR-кодом" data-ua="Табличка з QR-кодом"
+      <h2 class="qr-title editable-text qr-title-main" data-ru="Табличка с QR-кодом" data-ua="Табличка з QR-кодом" data-en="QR Code Plate"
         contenteditable="false">Табличка з QR-кодом</h2>
       <p class="qr-title editable-text qr-desc"
         data-ru="Введите финальную ссылку на ваш сайт, чтобы создать код для памятника."
-        data-ua="Введіть фінальне посилання на ваш сайт, щоб створити код для пам'ятника." contenteditable="false">
+        data-ua="Введіть фінальне посилання на ваш сайт, щоб створити код для пам'ятника." data-en="Enter the final link to your site to create a code for the monument." contenteditable="false">
         Введіть фінальне посилання на ваш сайт, щоб створити код для пам'ятника.</p>
 
       <div class="qr-input-group">
         <input type="text" id="qrUrlInput" class="qr-input url-input" placeholder="тест">
-        <button class="qr-btn" onclick="generateQr()"><span class="editable-text" data-ru="Создать" data-ua="Створити"
+        <button class="qr-btn" onclick="generateQr()"><span class="editable-text" data-ru="Создать" data-ua="Створити" data-en="Create"
             contenteditable="false">Створити</span></button>
       </div>
 
       <div class="qr-print-area" id="qrPrintArea">
-        <h1 class="editable-text qr-print-title" data-ru="Цифровой Мемориал" data-ua="Цифровий Меморіал"
+        <h1 class="editable-text qr-print-title" data-ru="Цифровой Мемориал" data-ua="Цифровий Меморіал" data-en="Digital Memorial"
           contenteditable="false">Цифровий Меморіал</h1>
-        <p class="editable-text qr-print-subtitle" data-ru="СЕМЬИ ГОЛОТРИНЫХ" data-ua="РОДИНИ ГОЛОТРІНИХ"
+        <p class="editable-text qr-print-subtitle" data-ru="СЕМЬИ ГОЛОТРИНЫХ" data-ua="РОДИНИ ГОЛОТРІНИХ" data-en="OF THE GOLOTRIN FAMILY"
           contenteditable="false">РОДИНИ ГОЛОТРІНИХ</p>
 
         <p class="editable-text qr-print-desc" data-ru="Наведите камеру смартфона на код, чтобы открыть страницу памяти"
-          data-ua="Наведіть камеру смартфона на код, щоб відкрити сторінку пам'яті" contenteditable="false">Наведіть
+          data-ua="Наведіть камеру смартфона на код, щоб відкрити сторінку пам'яті" data-en="Point your smartphone camera at the code to open the memorial page" contenteditable="false">Наведіть
           камеру смартфона на код, щоб відкрити сторінку пам'яті</p>
 
         <div id="qrCodeImg" class="qr-code-wrapper"></div>
 
         <p id="qrUrlDisplay" class="qr-url-display"></p>
         <p class="editable-text qr-print-footer" data-ru="Здесь бережно сохранена история нашей семьи"
-          data-ua="Тут дбайливо збережена історія нашої родини" contenteditable="false">Тут дбайливо збережена історія
+          data-ua="Тут дбайливо збережена історія нашої родини" data-en="Here the history of our family is carefully preserved" contenteditable="false">Тут дбайливо збережена історія
           нашої родини</p>
       </div>
 
@@ -392,7 +393,7 @@
             <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
             <rect x="6" y="14" width="12" height="8"></rect>
           </svg>
-          <span class="editable-text" data-ru="Распечатать" data-ua="Роздрукувати"
+          <span class="editable-text" data-ru="Распечатать" data-ua="Роздрукувати" data-en="Print"
             contenteditable="false">Роздрукувати</span>
         </button>
         <button class="action-btn btn-download" onclick="downloadQr()">
@@ -402,7 +403,7 @@
             <polyline points="7 10 12 15 17 10"></polyline>
             <line x1="12" y1="15" x2="12" y2="3"></line>
           </svg>
-          <span class="editable-text" data-ru="Скачать код" data-ua="Завантажити"
+          <span class="editable-text" data-ru="Скачать код" data-ua="Завантажити" data-en="Download Code"
             contenteditable="false">Завантажити</span>
         </button>
       </div>
@@ -415,10 +416,10 @@
         ручні правки)</h3>
       <div class="confirm-actions">
         <button class="cancel-btn" onclick="closeConfirmModal()"><span class="editable-text" data-ru="Отмена"
-            data-ua="Скасувати" contenteditable="false">Скасувати</span></button>
+            data-ua="Скасувати" data-en="Cancel" contenteditable="false">Скасувати</span></button>
         <button class="submit-btn confirm-btn-yes"
           onclick="if(window.currentConfirmCallback) window.currentConfirmCallback();"><span class="editable-text"
-            data-ru="Да" data-ua="Так" contenteditable="false">Так</span></button>
+            data-ru="Да" data-ua="Так" data-en="Yes" contenteditable="false">Так</span></button>
       </div>
     </div>
   </div>
@@ -427,17 +428,17 @@
     <span class="close-mobile-menu" onclick="toggleMobileMenu()"></span>
     <div class="mobile-menu-content">
       <a href="javascript:void(0)" class="editable-text" onclick="openBio('father-bio'); toggleMobileMenu()"
-        data-ru="ПРО МИХАИЛА" data-ua="ПРО МИХАЙЛА" contenteditable="false">ПРО МИХАЙЛА</a>
+        data-ru="ПРО МИХАИЛА" data-ua="ПРО МИХАЙЛА" data-en="ABOUT MIKHAIL" contenteditable="false">ПРО МИХАЙЛА</a>
       <a href="javascript:void(0)" class="editable-text" onclick="openBio('mother-bio'); toggleMobileMenu()"
-        data-ru="ПРО СВЕТЛАНУ" data-ua="ПРО СВІТЛАНУ" contenteditable="false">ПРО СВІТЛАНУ</a>
-      <a href="#timeline" class="editable-text" onclick="toggleMobileMenu()" data-ru="ЛИНИЯ ЖИЗНИ" data-ua="ЛІНІЯ ЖИТТЯ"
+        data-ru="ПРО СВЕТЛАНУ" data-ua="ПРО СВІТЛАНУ" data-en="ABOUT SVETLANA" contenteditable="false">ПРО СВІТЛАНУ</a>
+      <a href="#timeline" class="editable-text" onclick="toggleMobileMenu()" data-ru="ЛИНИЯ ЖИЗНИ" data-ua="ЛІНІЯ ЖИТТЯ" data-en="ЛИНИЯ ЖИЗНИ"
         contenteditable="false">ЛІНІЯ ЖИТТЯ</a>
       <a href="#timeline" class="editable-text" onclick="toggleMobileMenu()" data-ru="ЭПОХА 1942-2022"
-        data-ua="ЕПОХА 1942-2022" contenteditable="false">ЕПОХА 1942-2022</a>
+        data-ua="ЕПОХА 1942-2022" data-en="ЭПОХА 1942-2022" contenteditable="false">ЕПОХА 1942-2022</a>
       <a href="#ritual" class="editable-text" onclick="toggleMobileMenu()" data-ru="СВЕЧА ПАМЯТИ"
-        data-ua="СВІЧКА СПОГАДІВ" contenteditable="false">СВІЧКА СПОГАДІВ</a>
+        data-ua="СВІЧКА СПОГАДІВ" data-en="СВЕЧА ПАМЯТИ" contenteditable="false">СВІЧКА СПОГАДІВ</a>
       <button class="submit-btn mobile-share-btn" onclick="shareSite(); toggleMobileMenu()"><span class="editable-text"
-          data-ru="Поделиться ссылкой" data-ua="Поділитися посиланням" contenteditable="false">Поділитися
+          data-ru="Поделиться ссылкой" data-ua="Поділитися посиланням" data-en="Share Link" contenteditable="false">Поділитися
           посиланням</span></button>
     </div>
   </div>

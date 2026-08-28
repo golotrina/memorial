@@ -1,6 +1,22 @@
 // ==========================================
 // 1. ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ
 // ==========================================
+function getT(ua, en, ru) {
+  if (currentLang === 'en') return en || ua || ru;
+  if (currentLang === 'ru') return ru || ua;
+  return ua || ru;
+}
+
+function getLoc(obj, prop) {
+  if (!obj) return '';
+  const capLang = currentLang.charAt(0).toUpperCase() + currentLang.slice(1);
+  return obj[prop + capLang] || obj[prop + 'Ua'] || obj[prop + 'Ru'] || '';
+}
+
+function getLocProp(obj, prop) {
+  if (!obj) return '';
+  return obj[prop + '_' + currentLang] || obj[prop + '_ua'] || obj[prop + '_ru'] || obj[prop] || '';
+}
 let currentLang = 'ua';
 let baseFontSize = 16;
 let editCandleIndex = null;
@@ -13,10 +29,10 @@ let currentUploadId = null;
 let hasUnsavedChanges = false;
 
 const candleData = {
-  classic: { glow: 'rgba(255, 180, 0, 0.4)', flame: 'radial-gradient(ellipse at bottom, #0044FF 0%, #FFB400 40%, #FFF 80%)', nameRu: 'Свеча памяти', nameUa: "Свічка пам'яті" },
-  amber: { glow: 'rgba(255, 100, 0, 0.4)', flame: 'radial-gradient(ellipse at bottom, #0044FF 0%, #FF6400 40%, #FFD700 70%, #FFF 100%)', nameRu: 'Янтарный свет', nameUa: 'Бурштинове світло' },
-  heavenly: { glow: 'rgba(200, 230, 255, 0.4)', flame: 'radial-gradient(ellipse at bottom, #0044FF 0%, #87CEEB 40%, #FFF 80%)', nameRu: 'Небесное сияние', nameUa: 'Небесне сяйво' },
-  unquenchable: { glow: 'rgba(255, 0, 50, 0.5)', flame: 'radial-gradient(ellipse at bottom, #0044FF 0%, #E60026 40%, #FFB6C1 70%, #FFF 100%)', nameRu: 'Неугасаемое пламя', nameUa: "Незгасне полум'я" }
+  classic: { glow: 'rgba(255, 180, 0, 0.4)', flame: 'radial-gradient(ellipse at bottom, #0044FF 0%, #FFB400 40%, #FFF 80%)', nameRu: 'Свеча памяти', nameUa: "Свічка пам'яті", nameEn: "Candle of Memory" },
+  amber: { glow: 'rgba(255, 100, 0, 0.4)', flame: 'radial-gradient(ellipse at bottom, #0044FF 0%, #FF6400 40%, #FFD700 70%, #FFF 100%)', nameRu: 'Янтарный свет', nameUa: 'Бурштинове світло', nameEn: "Amber Light" },
+  heavenly: { glow: 'rgba(200, 230, 255, 0.4)', flame: 'radial-gradient(ellipse at bottom, #0044FF 0%, #87CEEB 40%, #FFF 80%)', nameRu: 'Небесное сияние', nameUa: 'Небесне сяйво', nameEn: "Heavenly Radiance" },
+  unquenchable: { glow: 'rgba(255, 0, 50, 0.5)', flame: 'radial-gradient(ellipse at bottom, #0044FF 0%, #E60026 40%, #FFB6C1 70%, #FFF 100%)', nameRu: 'Неугасаемое пламя', nameUa: "Незгасне полум'я", nameEn: "Unquenchable Flame" }
 };
 
 // ==========================================
@@ -79,12 +95,12 @@ async function apiTranslateText(text, from, to) {
 }
 
 function shareSite() {
-  const shareTitle = currentLang === 'ua' ? "Цифровий Меморіал родини Голотріних" : "Цифровой Мемориал семьи Голотриных";
+  const shareTitle = getT('Цифровий Меморіал родини Голотріних', 'Digital Memorial of the Golotrin Family', 'Цифровой Мемориал семьи Голотриных');
   if (navigator.share) {
     navigator.share({ title: shareTitle, url: window.location.href });
   } else {
     navigator.clipboard.writeText(window.location.href);
-    showToast(currentLang === 'ua' ? 'Посилання скопійовано!' : 'Ссылка скопирована!');
+    showToast(getT('Посилання скопійовано!', 'Link copied!', 'Ссылка скопирована!'));
   }
 }
 
@@ -152,9 +168,9 @@ function renderStaticContent() {
     if (el && text) { el.innerText = text; el.classList.add('editable-text'); }
   };
 
-  setEdit('hero-title', isUa ? content.hero.titleUa : content.hero.titleRu);
-  setEdit('hero-subtitle', isUa ? content.hero.subtitleUa : content.hero.subtitleRu);
-  setEdit('hero-quote', isUa ? content.hero.quoteUa : content.hero.quoteRu);
+  setEdit('hero-title', getLoc(content.hero, 'title'));
+  setEdit('hero-subtitle', getLoc(content.hero, 'subtitle'));
+  setEdit('hero-quote', getLoc(content.hero, 'quote'));
 
   if (grid && content.people) {
     grid.innerHTML = ''; // Очищаем перед рендером
@@ -169,11 +185,11 @@ function renderStaticContent() {
           <img id="photo-${person.id}" src="img/${person.photo}" alt="Фото" loading="lazy">
           <button class="edit-photo-btn admin-only" onclick="triggerUpload('photo-${person.id}'); event.stopPropagation();">📷 Загрузить фото</button>
         </div>
-        <h2 id="${person.id}-name" class="parent-name editable-text">${isUa ? person.nameUa : person.nameRu}</h2>
-        <div id="${person.id}-dates" class="parent-dates editable-text">${isUa ? person.datesUa : person.datesRu}</div>
-        <p id="${person.id}-bio-preview" class="parent-bio editable-text">${isUa ? person.bioUa : person.bioRu}</p>
+        <h2 id="${person.id}-name" class="parent-name editable-text">${getLoc(person, 'name')}</h2>
+        <div id="${person.id}-dates" class="parent-dates editable-text">${getLoc(person, 'dates')}</div>
+        <p id="${person.id}-bio-preview" class="parent-bio editable-text">${getLoc(person, 'bio')}</p>
         <button class="read-more-btn" onclick="openBio('${person.id}-bio')">
-          <span class="editable-text" data-ru="История" data-ua="Історія">${isUa ? 'Історія' : 'История'}</span>
+          <span class="editable-text" data-ru="История" data-ua="Історія">${getT('Історія', 'Story', 'История')}</span>
         </button>
       `;
       grid.appendChild(card);
@@ -199,22 +215,22 @@ function renderTimeline() {
   const isUa = currentLang === 'ua';
 
   const mTitle = document.getElementById('timeline-main-title');
-  if (mTitle) { mTitle.innerText = isUa ? tData.header.titleUa : tData.header.titleRu; mTitle.classList.add('editable-text'); }
+  if (mTitle) { mTitle.innerText = getLoc(tData.header, 'title'); mTitle.classList.add('editable-text'); }
 
   const mSub = document.getElementById('timeline-subtitle');
-  if (mSub) { mSub.innerText = isUa ? tData.header.subtitleUa : tData.header.subtitleRu; mSub.classList.add('editable-text'); }
+  if (mSub) { mSub.innerText = getLoc(tData.header, 'subtitle'); mSub.classList.add('editable-text'); }
 
   const epBtn = document.getElementById('timeline-epoch-btn');
-  if (epBtn) epBtn.innerText = isUa ? tData.header.btnUa : tData.header.btnRu;
+  if (epBtn) epBtn.innerText = getLoc(tData.header, 'btn');
 
   const container = document.getElementById('timeline-container');
   if (!container) return;
   container.innerHTML = '';
 
   tData.events.forEach((item, idx) => {
-    const yearText = isUa ? item.yearUa : item.yearRu;
-    const titleText = isUa ? item.titleUa : item.titleRu;
-    const descText = isUa ? item.textUa : item.textRu;
+    const yearText = getLoc(item, 'year');
+    const titleText = getLoc(item, 'title');
+    const descText = getLoc(item, 'text');
 
     let textHTML = item.isEpitaph
       ? `<div class="timeline-epitaph editable-text">${descText}</div>`
@@ -250,7 +266,7 @@ function createBioModalHtml(personId, galleryKey) {
         <div id="${personId}-modal-accordion" class="accordion modal-relative-z"></div>
         <div id="${personId}-modal-quotes" class="quotes-section"></div>
 
-        <h3 class="gallery-title editable-text" data-ru="Воспоминания" data-ua="Спогади">${currentLang === 'ua' ? 'Спогади' : 'Воспоминания'}</h3>
+        <h3 class="gallery-title editable-text" data-ru="Воспоминания" data-ua="Спогади">${getT('Спогади', 'Memories', 'Воспоминания')}</h3>
         
         <div class="gallery-wrapper-relative">
           <div class="c-sparks-wrap sparks-gallery"></div>
@@ -259,7 +275,7 @@ function createBioModalHtml(personId, galleryKey) {
         
         <div id="showMoreWrapper-${galleryKey}" class="btn-center-margin">
           <button class="read-more-btn modal-btn-no-margin" onclick="toggleGalleryExpand('${galleryKey}')" id="showMoreBtn-${galleryKey}">
-            <span>${currentLang === 'ua' ? 'Показати ще' : 'Показать еще'}</span>
+            <span>${getT('Показати ще', 'Show more', 'Показать еще')}</span>
           </button>
         </div>
         
@@ -276,16 +292,16 @@ function renderBioModalData(personId, data) {
   const isUa = currentLang === 'ua';
 
   const nameEl = document.getElementById(`${personId}-modal-name`); // Используем корректный ID из каркаса
-  if (nameEl) nameEl.innerText = isUa ? data.nameUa : data.nameRu;
+  if (nameEl) nameEl.innerText = getLoc(data, 'name');
 
   const datesEl = document.getElementById(`${personId}-modal-dates`);
-  if (datesEl) datesEl.innerText = isUa ? data.datesUa : data.datesRu;
+  if (datesEl) datesEl.innerText = getLoc(data, 'dates');
 
   const quoteEl = document.getElementById(`${personId}-modal-personal-quote`);
-  if (quoteEl) { quoteEl.innerText = isUa ? (data.personalQuoteUa || '') : (data.personalQuoteRu || ''); quoteEl.classList.add('editable-text'); }
+  if (quoteEl) { quoteEl.innerText = getLoc(data, 'personalQuote'); quoteEl.classList.add('editable-text'); }
 
   const introEl = document.getElementById(`${personId}-modal-intro`);
-  if (introEl) { introEl.innerText = isUa ? (data.introUa || '') : (data.introRu || ''); introEl.classList.add('editable-text'); }
+  if (introEl) { introEl.innerText = getLoc(data, 'intro'); introEl.classList.add('editable-text'); }
 
   const accContainer = document.getElementById(`${personId}-modal-accordion`);
   if (accContainer) {
@@ -294,11 +310,11 @@ function renderBioModalData(personId, data) {
       data.accordion.forEach((item, idx) => {
         const itemEl = document.createElement('div');
         itemEl.className = 'accordion-item';
-        const paragraphs = isUa ? item.paragraphsUa : item.paragraphsRu;
+        const paragraphs = getLoc(item, 'paragraphs');
         const pHTML = paragraphs ? paragraphs.map(p => `<p class="editable-text">${p}</p>`).join('') : '';
         itemEl.innerHTML = `
           <button class="accordion-header" onclick="toggleAccordion(this)">
-            <span class="editable-text">${isUa ? item.titleUa : item.titleRu}</span>
+            <span class="editable-text">${getLoc(item, 'title')}</span>
             <span class="accordion-icon">+</span>
           </button>
           <div class="accordion-content"><div class="accordion-inner">${pHTML}</div></div>
@@ -317,8 +333,8 @@ function renderBioModalData(personId, data) {
         qEl.className = 'quote-card';
         qEl.innerHTML = `
           <span class="quote-icon">“</span>
-          <p class="quote-text editable-text">${isUa ? (q.textUa || q.textRu) : (q.textRu || q.textUa)}</p>
-          <p class="quote-author editable-text">${isUa ? (q.authorUa || q.authorRu) : (q.authorRu || q.authorUa)}</p>
+          <p class="quote-text editable-text">${getLoc(q, 'text')}</p>
+          <p class="quote-author editable-text">${getLoc(q, 'author')}</p>
         `;
         qContainer.appendChild(qEl);
       });
@@ -334,10 +350,10 @@ function renderEpochModal(data) {
   const isUa = currentLang === 'ua';
 
   const mTitle = document.getElementById('epoch-main-title');
-  if (mTitle) mTitle.innerText = isUa ? data.header.titleUa : data.header.titleRu;
+  if (mTitle) mTitle.innerText = getLoc(data.header, 'title');
 
   const mSub = document.getElementById('epoch-subtitle');
-  if (mSub) mSub.innerText = isUa ? data.header.subtitleUa : data.header.subtitleRu;
+  if (mSub) mSub.innerText = getLoc(data.header, 'subtitle');
 
   const container = document.getElementById('epoch-timeline-container');
   if (!container) return;
@@ -345,9 +361,9 @@ function renderEpochModal(data) {
 
   if (data.events) {
     data.events.forEach((ev, idx) => {
-      const dateText = isUa ? ev.dateUa : ev.dateRu;
-      const titleText = isUa ? ev.titleUa : ev.titleRu;
-      const paragraphs = isUa ? ev.paragraphsUa : ev.paragraphsRu;
+      const dateText = getLoc(ev, 'date');
+      const titleText = getLoc(ev, 'title');
+      const paragraphs = getLoc(ev, 'paragraphs');
 
       const evEl = document.createElement('div');
       evEl.className = 'accordion-item fade-up visible';
@@ -383,21 +399,23 @@ function changeZoom(step) {
 
 function setLang(lang) {
   currentLang = lang;
+  document.documentElement.lang = currentLang === 'ua' ? 'uk' : currentLang;
   if (typeof renderStaticContent === 'function') renderStaticContent();
 
   document.getElementById('btn-lang-ua')?.classList.toggle('active', lang === 'ua');
+  document.getElementById('btn-lang-en')?.classList.toggle('active', lang === 'en');
   document.getElementById('btn-lang-ru')?.classList.toggle('active', lang === 'ru');
 
-  document.querySelectorAll('[data-ua][data-ru]').forEach(el => el.innerHTML = el.getAttribute(`data-${currentLang}`));
-  document.querySelectorAll('[data-placeholder-ua][data-placeholder-ru]').forEach(el => el.placeholder = el.getAttribute(`data-placeholder-${currentLang}`));
+  document.querySelectorAll('[data-ua][data-ru][data-en]').forEach(el => el.innerHTML = el.getAttribute(`data-${currentLang}`) || el.getAttribute('data-ua'));
+  document.querySelectorAll('[data-placeholder-ua][data-placeholder-ru][data-placeholder-en]').forEach(el => el.placeholder = el.getAttribute(`data-placeholder-${currentLang}`) || el.getAttribute('data-placeholder-ua'));
 
-  document.querySelectorAll('[data-title-ua][data-title-ru]').forEach(el => {
-    el.title = el.getAttribute(`data-title-${currentLang}`);
+  document.querySelectorAll('[data-title-ua][data-title-ru][data-title-en]').forEach(el => {
+    el.title = el.getAttribute(`data-title-${currentLang}`) || el.getAttribute('data-title-ua');
   });
 
   const creatorLink = document.querySelector('.creator-link');
   if (creatorLink) {
-    creatorLink.title = currentLang === 'ua' ? 'Скопіювати Email творця' : 'Скопировать Email создателя';
+    creatorLink.title = getT('Скопіювати Email творця', 'Copy Creator Email', 'Скопировать Email создателя');
   }
 
   document.querySelectorAll('.gallery-caption').forEach(el => {
@@ -406,7 +424,7 @@ function setLang(lang) {
     if (text !== null) el.innerText = text;
   });
 
-  document.title = currentLang === 'ua' ? "Цифровий Меморіал родини Голотріних" : "Цифровой Мемориал семьи Голотриных";
+  document.title = getT('Цифровий Меморіал родини Голотріних', 'Digital Memorial of the Golotrin Family', 'Цифровой Мемориал семьи Голотриных');
 
   if (typeof renderCandles === 'function') renderCandles();
   if (typeof updateGalleryVisibility === 'function' && window.SITE_CONTENT?.people) {
@@ -458,18 +476,52 @@ function createSparks() {
 }
 
 function toggleTheme() {
-  document.body.classList.toggle('dark-theme');
-  const isDark = document.body.classList.contains('dark-theme');
-  localStorage.setItem('memorial_theme', isDark ? 'dark' : 'light');
-
+  const themes = ['light', 'sepia', 'dark'];
+  let currentThemeIndex = 0;
+  if (document.body.classList.contains('dark-theme')) currentThemeIndex = 2;
+  else if (document.body.classList.contains('sepia-theme')) currentThemeIndex = 1;
+  
+  currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+  const nextTheme = themes[currentThemeIndex];
+  
+  document.body.classList.remove('dark-theme', 'sepia-theme');
+  if (nextTheme !== 'light') {
+    document.body.classList.add(`${nextTheme}-theme`);
+  }
+  
+  localStorage.setItem('memorial_theme', nextTheme);
+  
   const themeIcon = document.getElementById('theme-icon');
   if (themeIcon) {
-    themeIcon.innerText = isDark ? '☀️' : '🌙';
+    let icon = '☀️';
+    let titleRu = 'Светлая тема';
+    let titleUa = 'Світла тема';
+    let titleEn = 'Light Theme';
+    
+    if (nextTheme === 'dark') {
+      icon = '🌙';
+      titleRu = 'Темная тема';
+      titleUa = 'Темна тема';
+      titleEn = 'Dark Theme';
+    } else if (nextTheme === 'sepia') {
+      icon = '📜';
+      titleRu = 'Сепия (Винтаж)';
+      titleUa = 'Сепія (Вінтаж)';
+      titleEn = 'Sepia Theme';
+    }
+    
+    themeIcon.innerText = icon;
     const btn = themeIcon.parentElement;
     if (btn) {
-      btn.setAttribute('data-title-ru', isDark ? 'Светлая тема' : 'Ночная тема');
-      btn.setAttribute('data-title-ua', isDark ? 'Світла тема' : 'Нічна тема');
-      btn.title = btn.getAttribute(`data-title-${currentLang}`) || '';
+      btn.setAttribute('data-title-ru', titleRu);
+      btn.setAttribute('data-title-ua', titleUa);
+      btn.setAttribute('data-title-en', titleEn);
+      // Try using getT if it's available and currentLang is defined, else fallback to JS setting
+      try {
+        btn.title = getT(titleUa, titleEn, titleRu);
+      } catch(e) {
+        btn.title = titleUa;
+      }
     }
   }
 }
@@ -555,7 +607,7 @@ async function saveSettings() {
   }
   
   closeSettingsModal();
-  showToast(currentLang === 'ua' ? 'Налаштування збережено!' : 'Настройки сохранены!');
+  showToast(getT('Налаштування збережено!', 'Settings saved!', 'Настройки сохранены!'));
 }
 
 async function checkAdminPassword() {
@@ -565,7 +617,7 @@ async function checkAdminPassword() {
     closeAdminAuthModal();
     document.getElementById('adminPanel').style.display = 'flex';
     if (!document.body.classList.contains('admin-mode')) toggleAdmin();
-    showToast(currentLang === 'ua' ? 'Режим редактора увімкнено!' : 'Режим редактора включен!');
+    showToast(getT('Режим редактора увімкнено!', 'Editor mode enabled!', 'Режим редактора включен!'));
   } else {
     const errorEl = document.getElementById('adminPwdError');
     if (errorEl) errorEl.style.display = 'block';
@@ -606,10 +658,10 @@ function initGalleries() {
       wrap.innerHTML = `
         <div class="gallery-item" onclick="openLightbox(this)">
           <img id="${item.id}" src="img/${item.id}.webp" alt="Фото" loading="lazy">
-          <button class="move-photo-btn move-photo-left" onclick="moveGalleryPhoto(this, -1); event.stopPropagation();" data-title-ru="Сдвинуть влево" data-title-ua="Зсунути ліворуч" title="${currentLang === 'ua' ? 'Зсунути ліворуч' : 'Сдвинуть влево'}">&#10094;</button>
-          <button class="move-photo-btn move-photo-right" onclick="moveGalleryPhoto(this, 1); event.stopPropagation();" data-title-ru="Сдвинуть вправо" data-title-ua="Зсунути праворуч" title="${currentLang === 'ua' ? 'Зсунути праворуч' : 'Сдвинуть вправо'}">&#10095;</button>
+          <button class="move-photo-btn move-photo-left" onclick="moveGalleryPhoto(this, -1); event.stopPropagation();" data-title-ru="Сдвинуть влево" data-title-ua="Зсунути ліворуч" title="${getT('Зсунути ліворуч', 'Move left', 'Сдвинуть влево')}">&#10094;</button>
+          <button class="move-photo-btn move-photo-right" onclick="moveGalleryPhoto(this, 1); event.stopPropagation();" data-title-ru="Сдвинуть вправо" data-title-ua="Зсунути праворуч" title="${getT('Зсунути праворуч', 'Move right', 'Сдвинуть вправо')}">&#10095;</button>
           <button class="edit-photo-btn" onclick="triggerUpload('${item.id}'); event.stopPropagation();">📷 Загрузить</button>
-          <button class="delete-photo-btn" onclick="deleteGalleryPhoto(this); event.stopPropagation();" data-title-ru="Удалить" data-title-ua="Видалити" title="${currentLang === 'ua' ? 'Видалити' : 'Удалить'}">🗑️</button>
+          <button class="delete-photo-btn" onclick="deleteGalleryPhoto(this); event.stopPropagation();" data-title-ru="Удалить" data-title-ua="Видалити" title="${getT('Видалити', 'Delete', 'Удалить')}">🗑️</button>
         </div>
         <div class="gallery-caption editable-text" contenteditable="false" data-placeholder-ru="Добавить подпись..." data-placeholder-ua="Додати підпис..." data-ru="${item.ru}" data-ua="${item.ua}">${text}</div>
       `;
@@ -630,7 +682,7 @@ function updateGalleryVisibility(galleryId) {
 
   if (items.length > MAX_VISIBLE_GALLERY) {
     if (showMoreWrapper) showMoreWrapper.style.display = 'block';
-    if (showMoreBtn) showMoreBtn.innerHTML = isGalleryExpanded[galleryId] ? (currentLang === 'ua' ? '<span class="editable-text" data-ru="Сховати фото" data-ua="Сховати фото">Сховати фото</span>' : '<span class="editable-text" data-ru="Скрыть фото" data-ua="Сховати фото">Скрыть фото</span>') : (currentLang === 'ua' ? `<span class="editable-text" data-ru="Показати ще" data-ua="Показати ще">Показати ще (${items.length - MAX_VISIBLE_GALLERY})</span>` : `<span class="editable-text" data-ru="Показать еще" data-ua="Показати ще">Показать еще (${items.length - MAX_VISIBLE_GALLERY})</span>`);
+    if (showMoreBtn) showMoreBtn.innerHTML = isGalleryExpanded[galleryId] ? (getT('<span class="editable-text" data-ru="Сховати фото" data-ua="Сховати фото" data-en="Hide photos">Сховати фото</span>', '<span class="editable-text" data-ru="Скрыть фото" data-ua="Сховати фото" data-en="Hide photos">Hide photos</span>', '<span class="editable-text" data-ru="Скрыть фото" data-ua="Сховати фото" data-en="Hide photos">Скрыть фото</span>')) : (getT(`<span class="editable-text" data-ru="Показати ще" data-ua="Показати ще" data-en="Show more">Показати ще (${items.length - MAX_VISIBLE_GALLERY})</span>`, `<span class="editable-text" data-ru="Показать еще" data-ua="Показати ще" data-en="Show more">Show more (${items.length - MAX_VISIBLE_GALLERY})</span>`, `<span class="editable-text" data-ru="Показать еще" data-ua="Показати ще" data-en="Show more">Показать еще (${items.length - MAX_VISIBLE_GALLERY})</span>`));
   } else if (showMoreWrapper) showMoreWrapper.style.display = 'none';
 }
 
@@ -638,7 +690,7 @@ function toggleGalleryExpand(galleryId) { isGalleryExpanded[galleryId] = !isGall
 function triggerUpload(imgId) { currentUploadId = imgId; document.getElementById('file-uploader').click(); }
 
 function deleteGalleryPhoto(btn) {
-  customConfirm(currentLang === 'ua' ? 'Видалити це фото?' : 'Удалить это фото?', () => {
+  customConfirm(getT('Видалити це фото?', 'Delete this photo?', 'Удалить это фото?'), () => {
     const wrap = btn.closest('.gallery-item-wrap');
     const galleryId = wrap.closest('.modal-gallery').id;
     if (wrap) wrap.remove();
@@ -665,12 +717,12 @@ function addGalleryPhoto(galleryId) {
   wrap.innerHTML = `
     <div class="gallery-item" onclick="openLightbox(this)">
       <img id="${newId}" src="https://images.unsplash.com/photo-1506869640319-fea1a278e0db?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Фото" loading="lazy">
-      <button class="move-photo-btn move-photo-left" onclick="moveGalleryPhoto(this, -1); event.stopPropagation();" data-title-ru="Сдвинуть влево" data-title-ua="Зсунути ліворуч" title="${currentLang === 'ua' ? 'Зсунути ліворуч' : 'Сдвинуть влево'}">&#10094;</button>
-      <button class="move-photo-btn move-photo-right" onclick="moveGalleryPhoto(this, 1); event.stopPropagation();" data-title-ru="Сдвинуть вправо" data-title-ua="Зсунути праворуч" title="${currentLang === 'ua' ? 'Зсунути праворуч' : 'Сдвинуть вправо'}">&#10095;</button>
+      <button class="move-photo-btn move-photo-left" onclick="moveGalleryPhoto(this, -1); event.stopPropagation();" data-title-ru="Сдвинуть влево" data-title-ua="Зсунути ліворуч" title="${getT('Зсунути ліворуч', 'Move left', 'Сдвинуть влево')}">&#10094;</button>
+      <button class="move-photo-btn move-photo-right" onclick="moveGalleryPhoto(this, 1); event.stopPropagation();" data-title-ru="Сдвинуть вправо" data-title-ua="Зсунути праворуч" title="${getT('Зсунути праворуч', 'Move right', 'Сдвинуть вправо')}">&#10095;</button>
       <button class="edit-photo-btn" onclick="triggerUpload('${newId}'); event.stopPropagation();">📷 Загрузить</button>
-      <button class="delete-photo-btn" onclick="deleteGalleryPhoto(this); event.stopPropagation();" data-title-ru="Удалить" data-title-ua="Видалити" title="${currentLang === 'ua' ? 'Видалити' : 'Удалить'}">🗑️</button>
+      <button class="delete-photo-btn" onclick="deleteGalleryPhoto(this); event.stopPropagation();" data-title-ru="Удалить" data-title-ua="Видалити" title="${getT('Видалити', 'Delete', 'Удалить')}">🗑️</button>
     </div>
-    <div class="gallery-caption editable-text" contenteditable="${isAdm}" data-placeholder="${currentLang === 'ua' ? 'Додати підпис...' : 'Добавить подпись...'}" data-placeholder-ru="Добавить подпись..." data-placeholder-ua="Додати підпис..." data-ru="" data-ua=""></div>
+    <div class="gallery-caption editable-text" contenteditable="${isAdm}" data-placeholder="${getT('Додати підпис...', 'Add caption...', 'Добавить подпись...')}" data-placeholder-ru="Добавить подпись..." data-placeholder-ua="Додати підпис..." data-ru="" data-ua=""></div>
   `;
   gallery.appendChild(wrap);
   updateGalleryVisibility(galleryId);
@@ -730,13 +782,13 @@ function renderCandles() {
   visibleCandles.forEach((c, index) => {
     if (!isCandlesExpanded && index >= MAX_VISIBLE) return;
     const typeInfo = candleData[c.type] || candleData['classic'];
-    const typeName = currentLang === 'ru' ? typeInfo.nameRu : typeInfo.nameUa;
+    const typeName = getLoc(typeInfo, 'name');
     const dateObj = new Date(c.timestamp);
     const dateStr = dateObj.toLocaleDateString('ru-RU') + ', ' + dateObj.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
 
     // Берем язык строго по текущей версии, если его нет - fallback на другой
-    let cName = currentLang === 'ua' ? (c.name_ua || c.name_ru || c.name) : (c.name_ru || c.name_ua || c.name);
-    let cMessage = currentLang === 'ua' ? (c.message_ua || c.message_ru || c.message) : (c.message_ru || c.message_ua || c.message);
+    let cName = getLocProp(c, 'name');
+    let cMessage = getLocProp(c, 'message');
 
     cName = escapeHTML(cName);
     cMessage = escapeHTML(cMessage);
@@ -746,7 +798,7 @@ function renderCandles() {
     if (cMessage) {
       msgHtml = `<div class="candle-msg-text ${isLongMsg ? 'collapsible' : ''}">${cMessage}</div>`;
       if (isLongMsg) {
-        msgHtml += `<button class="candle-expand-btn" onclick="this.previousElementSibling.classList.toggle('expanded'); this.innerText = this.previousElementSibling.classList.contains('expanded') ? (currentLang === 'ua' ? 'Сховати' : 'Скрыть') : (currentLang === 'ua' ? 'Читати далі...' : 'Читать далее...')">${currentLang === 'ua' ? 'Читати далі...' : 'Читать далее...'}</button>`;
+        msgHtml += `<button class="candle-expand-btn" onclick="this.previousElementSibling.classList.toggle('expanded'); this.innerText = this.previousElementSibling.classList.contains('expanded') ? (getT('Сховати', 'Hide', 'Скрыть')) : (getT('Читати далі...', 'Read more...', 'Читать далее...'))">${getT('Читати далі...', 'Read more...', 'Читать далее...')}</button>`;
       }
     }
 
@@ -757,7 +809,7 @@ function renderCandles() {
     card.innerHTML = `
       <div class="candle-admin-actions">
         <button onclick="editCandle('${c.id}')" title="Редактировать">✏️</button>
-        <button onclick="deleteCandle('${c.id}')" data-title-ru="Удалить" data-title-ua="Видалити" title="${currentLang === 'ua' ? 'Видалити' : 'Удалить'}">🗑️</button>
+        <button onclick="deleteCandle('${c.id}')" data-title-ru="Удалить" data-title-ua="Видалити" title="${getT('Видалити', 'Delete', 'Удалить')}">🗑️</button>
       </div>
       <div class="c-sparks-wrap"></div>
       <div style="display: flex; gap: 20px; flex-grow: 1; margin-bottom: 25px; z-index: 1; position: relative;">
@@ -783,7 +835,7 @@ function renderCandles() {
 
   if (visibleCandles.length > MAX_VISIBLE) {
     showMoreWrapper.style.display = 'block';
-    showMoreBtn.innerText = isCandlesExpanded ? (currentLang === 'ua' ? 'Сховати' : 'Скрыть') : (currentLang === 'ua' ? `Показати ще (${visibleCandles.length - MAX_VISIBLE})` : `Показать еще (${visibleCandles.length - MAX_VISIBLE})`);
+    showMoreBtn.innerText = isCandlesExpanded ? (getT('Сховати', 'Hide', 'Скрыть')) : (`${getT('Показати ще', 'Show more', 'Показать еще')} (${visibleCandles.length - MAX_VISIBLE})`);
   } else if (showMoreWrapper) showMoreWrapper.style.display = 'none';
 
   createSparks();
@@ -833,8 +885,8 @@ async function handleCandleSubmit(e) {
   let msgChanged = true;
 
   if (isEditing) {
-    let oldNameCur = currentLang === 'ua' ? (c.name_ua || c.name_ru || c.name) : (c.name_ru || c.name_ua || c.name);
-    let oldMsgCur = currentLang === 'ua' ? (c.message_ua || c.message_ru || c.message || '') : (c.message_ru || c.message_ua || c.message || '');
+    let oldNameCur = getLocProp(c, 'name');
+    let oldMsgCur = getLocProp(c, 'message');
     nameChanged = nameInp !== oldNameCur;
     msgChanged = msgInp !== oldMsgCur;
   }
@@ -846,58 +898,78 @@ async function handleCandleSubmit(e) {
     // Админа спрашиваем, переводить ли, чтобы не стереть его возможные ручные правки в другом языке
     let targetHasText = currentLang === 'ua' ? (c.name_ru || c.message_ru) : (c.name_ua || c.message_ua);
     if (targetHasText) {
-      let msg = currentLang === 'ua'
-        ? 'Оновити переклад іншої версії автоматично?\n(ОК - перекласти заново, Скасувати - зберегти ваші минулі ручні правки)'
-        : 'Обновить перевод другой версии автоматически?\n(ОК - перевести заново, Отмена - сохранить ваши прошлые ручные правки)';
+      let msg = getT('Оновити переклад іншої версії автоматично?\n(ОК - перекласти заново, Скасувати - зберегти ваші минулі ручні правки)', 'Update the translation of the other version automatically?\n(OK - translate again, Cancel - keep your past manual edits)', 'Обновить перевод другой версии автоматически?\n(ОК - перевести заново, Отмена - сохранить ваши прошлые ручные правки)');
       doAutoTranslate = confirm(msg);
     }
   } else if (!isAdmin) {
     // Обычный посетитель: переводим ТИХО, без окон, чтобы сразу заполнить базу на 2 языках
-    showToast(currentLang === 'ua' ? 'Запалюємо свічку...' : 'Зажигаем свечу...');
+    showToast(getT('Запалюємо свічку...', 'Lighting a candle...', 'Зажигаем свечу...'));
     doAutoTranslate = true;
   }
 
   let final_name_ru = nameInp;
   let final_name_ua = nameInp;
+  let final_name_en = nameInp;
   let final_msg_ru = msgInp;
   let final_msg_ua = msgInp;
+  let final_msg_en = msgInp;
 
   if (isEditing) {
     final_name_ru = c.name_ru || nameInp;
     final_name_ua = c.name_ua || nameInp;
+    final_name_en = c.name_en || nameInp;
     final_msg_ru = c.message_ru || msgInp;
     final_msg_ua = c.message_ua || msgInp;
+    final_msg_en = c.message_en || msgInp;
 
     if (currentLang === 'ua') { final_name_ua = nameInp; final_msg_ua = msgInp; }
+    else if (currentLang === 'en') { final_name_en = nameInp; final_msg_en = msgInp; }
     else { final_name_ru = nameInp; final_msg_ru = msgInp; }
   } else {
     if (currentLang === 'ua') { final_name_ua = nameInp; final_msg_ua = msgInp; }
+    else if (currentLang === 'en') { final_name_en = nameInp; final_msg_en = msgInp; }
     else { final_name_ru = nameInp; final_msg_ru = msgInp; }
   }
 
   if (doAutoTranslate && (nameChanged || msgChanged)) {
+    // Translate to missing languages
+    let targetLangs = ['uk', 'ru', 'en'].filter(l => {
+      let lMapped = l === 'uk' ? 'ua' : l;
+      return lMapped !== currentLang;
+    });
+    
     if (nameInp && nameChanged) {
-      let translatedName = await apiTranslateText(nameInp, sourceLang, targetLang);
-      if (currentLang === 'ua') final_name_ru = translatedName; else final_name_ua = translatedName;
+      for (let tLang of targetLangs) {
+        let tName = await apiTranslateText(nameInp, currentLang === 'ua' ? 'uk' : currentLang, tLang);
+        if (tLang === 'uk') final_name_ua = tName;
+        else if (tLang === 'ru') final_name_ru = tName;
+        else if (tLang === 'en') final_name_en = tName;
+      }
     }
     if (msgInp && msgChanged) {
-      let translatedMsg = await apiTranslateText(msgInp, sourceLang, targetLang);
-      if (currentLang === 'ua') final_msg_ru = translatedMsg; else final_msg_ua = translatedMsg;
+      for (let tLang of targetLangs) {
+        let tMsg = await apiTranslateText(msgInp, currentLang === 'ua' ? 'uk' : currentLang, tLang);
+        if (tLang === 'uk') final_msg_ua = tMsg;
+        else if (tLang === 'ru') final_msg_ru = tMsg;
+        else if (tLang === 'en') final_msg_en = tMsg;
+      }
     }
   }
 
   if (isEditing) {
     window.DB_CANDLES[editCandleIndex].name_ru = final_name_ru;
     window.DB_CANDLES[editCandleIndex].name_ua = final_name_ua;
+    window.DB_CANDLES[editCandleIndex].name_en = final_name_en;
     window.DB_CANDLES[editCandleIndex].message_ru = final_msg_ru;
     window.DB_CANDLES[editCandleIndex].message_ua = final_msg_ua;
+    window.DB_CANDLES[editCandleIndex].message_en = final_msg_en;
     window.DB_CANDLES[editCandleIndex].type = typeRad;
     window.DB_CANDLES[editCandleIndex].status = 'approved'; // При ручном редактировании админом свеча одобряется
     renderCandles(); toggleCandleForm();
 
     if (isAdmin) {
       hasUnsavedChanges = true;
-      showToast(currentLang === 'ua' ? 'Зміни збережено. Не забудьте "Зберегти зміни" в адмінці!' : 'Изменения сохранены. Нажмите "Сохранить изменения" в админке!');
+      showToast(getT('Зміни збережено. Не забудьте "Зберегти зміни" в адмінці!', 'Changes saved. Do not forget to "Save changes" in the admin panel!', 'Изменения сохранены. Нажмите "Сохранить изменения" в админке!'));
     }
     return;
   }
@@ -906,8 +978,10 @@ async function handleCandleSubmit(e) {
     id: 'c_' + Date.now(),
     name_ru: final_name_ru,
     name_ua: final_name_ua,
+    name_en: final_name_en,
     message_ru: final_msg_ru,
     message_ua: final_msg_ua,
+    message_en: final_msg_en,
     type: typeRad,
     timestamp: Date.now(),
     status: isAdmin ? 'approved' : 'pending', // Админ сразу одобряет
@@ -928,10 +1002,10 @@ async function handleCandleSubmit(e) {
 
   if (isAdmin) {
     hasUnsavedChanges = true;
-    showToast(currentLang === 'ua' ? 'Свічку додано!' : 'Свеча добавлена!');
+    showToast(getT('Свічку додано!', 'Candle added!', 'Свеча добавлена!'));
   } else {
     sendTelegramNotification(newCandle);
-    showToast(currentLang === 'ua' ? 'Свічку запалено! Вона з\'явиться назавжди після модерації.' : 'Свеча зажжена! Она появится навсегда после модерации.');
+    showToast(getT('Свічку запалено! Вона з\'явиться назавжди після модерації.', 'Candle lit! It will appear permanently after moderation.', 'Свеча зажжена! Она появится навсегда после модерации.'));
   }
 }
 
@@ -980,8 +1054,8 @@ function editCandle(id) {
   const index = window.DB_CANDLES.findIndex(c => c.id === id);
   if (index === -1) return;
   const c = window.DB_CANDLES[index]; // ИСПРАВЛЕНО: объявление переменной c (ранее вызывало ReferenceError)
-  document.getElementById('cName').value = currentLang === 'ua' ? (c.name_ua || c.name_ru || c.name) : (c.name_ru || c.name_ua || c.name);
-  document.getElementById('cMessage').value = currentLang === 'ua' ? (c.message_ua || c.message_ru || c.message || '') : (c.message_ru || c.message_ua || c.message || '');
+  document.getElementById('cName').value = getLocProp(c, 'name');
+  document.getElementById('cMessage').value = getLocProp(c, 'message');
   document.querySelector(`input[name="cType"][value="${c.type}"]`).checked = true;
   editCandleIndex = index;
   const wrapper = document.getElementById('candleFormWrapper');
@@ -1024,7 +1098,7 @@ function closeQrModal() {
 
 function generateQr() {
   let url = document.getElementById('qrUrlInput').value.trim();
-  if (!url) { showToast(currentLang === 'ua' ? 'Введіть посилання!' : 'Введите ссылку!'); return; }
+  if (!url) { showToast(getT('Введіть посилання!', 'Enter the link!', 'Введите ссылку!')); return; }
 
   if (!url.startsWith('http://') && !url.startsWith('https://')) {
     url = 'https://' + url;
@@ -1033,7 +1107,7 @@ function generateQr() {
 
   const urlPattern = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
   if (!urlPattern.test(url)) {
-    showToast(currentLang === 'ua' ? '❌ Некоректний формат посилання!' : '❌ Некорректный формат ссылки!');
+    showToast(getT('❌ Некоректний формат посилання!', '❌ Invalid link format!', '❌ Некорректный формат ссылки!'));
     return;
   }
 
@@ -1225,14 +1299,12 @@ async function runAutoTranslate() {
 
   if (!confirm(msgTranslate)) return;
 
-  showToast(currentLang === 'ua' ? 'Виконуємо розумний автопереклад...' : 'Выполняем умный автоперевод...');
+  showToast(getT('Виконуємо розумний автопереклад...', 'Performing smart auto-translation...', 'Выполняем умный автоперевод...'));
   
   await harvestData(true);
   
   hasUnsavedChanges = true;
-  showLongWarningToast(currentLang === 'ua' 
-    ? '✅ УСПІХ! Змінені блоки успішно перекладені.<br><br><b>ОБОВ\'ЯЗКОВО натисніть "Зберегти на GitHub", щоб зафіксувати переклад.</b>' 
-    : '✅ УСПЕХ! Измененные блоки успешно переведены.<br><br><b>ОБЯЗАТЕЛЬНО нажмите "Сохранить на GitHub", чтобы зафиксировать перевод.</b>');
+  showLongWarningToast(getT('✅ УСПІХ! Змінені блоки успішно перекладені.<br><br><b>ОБОВ\'ЯЗКОВО натисніть "Зберегти на GitHub", щоб зафіксувати переклад.</b>', '✅ SUCCESS! Changed blocks successfully translated.<br><br><b>Make sure to click "Save to GitHub" to commit the translation.</b>', '✅ УСПЕХ! Измененные блоки успешно переведены.<br><br><b>ОБЯЗАТЕЛЬНО нажмите "Сохранить на GitHub", чтобы зафиксировать перевод.</b>'));
 }
 
 async function downloadSiteData() {
@@ -1260,14 +1332,12 @@ async function downloadSiteData() {
   let ghToken = localStorage.getItem('gh_token');
 
   if (!ghToken) {
-    alert(currentLang === 'ua' 
-      ? "Будь ласка, вкажіть GitHub Token у Налаштуваннях (кнопка ⚙️ Налаштування в адмінці)." 
-      : "Пожалуйста, укажите GitHub Token в Настройках (кнопка ⚙️ Настройки в админке).");
+    alert(getT('Будь ласка, вкажіть GitHub Token у Налаштуваннях (кнопка ⚙️ Налаштування в адмінці).', 'Please provide the GitHub Token in the Settings (⚙️ Settings button in admin panel).', 'Пожалуйста, укажите GitHub Token в Настройках (кнопка ⚙️ Настройки в админке).'));
     openSettingsModal();
     return;
   }
 
-  showToast(currentLang === 'ua' ? 'Відправка файлів на GitHub...' : 'Отправка файлов на GitHub...');
+  showToast(getT('Відправка файлів на GitHub...', 'Sending files to GitHub...', 'Отправка файлов на GitHub...'));
 
   try {
     const url = `https://api.github.com/repos/${ghOwner}/${ghRepo}/contents/js/data.js`;
@@ -1289,9 +1359,7 @@ async function downloadSiteData() {
     if (!putRes.ok) throw new Error(`Ошибка при записи js/data.js`);
 
     hasUnsavedChanges = false;
-    showLongWarningToast(currentLang === 'ua'
-      ? '✅ УСПІХ! Дані оновлено на GitHub.<br><br><b>УВАГА: Не оновлюйте сторінку найближчі 2-3 хвилини!</b>'
-      : '✅ УСПЕХ! Данные обновлены на GitHub.<br><br><b>ВНИМАНИЕ: Не обновляйте страницу ближайшие 2-3 минуты!</b>');
+    showLongWarningToast(getT('✅ УСПІХ! Дані оновлено на GitHub.<br><br><b>УВАГА: Не оновлюйте сторінку найближчі 2-3 хвилини!</b>', '✅ SUCCESS! Data updated on GitHub.<br><br><b>WARNING: Do not refresh the page for the next 2-3 minutes!</b>', '✅ УСПЕХ! Данные обновлены на GitHub.<br><br><b>ВНИМАНИЕ: Не обновляйте страницу ближайшие 2-3 минуты!</b>'));
   } catch (error) {
     console.error(error);
     alert(`Ошибка: ${error.message}`);
@@ -1308,7 +1376,7 @@ function initializeMemorialApp() {
     if (saved) {
       localCandles = JSON.parse(saved);
       // Очищаем те, которые уже появились в публичной БД
-      localCandles = localCandles.filter(lc => !window.DB_CANDLES.some(pub => pub.id === lc.id));
+      localCandles = localCandles.filter(lc => !window.DB_CANDLES.some(pub => pub.id === lc.id) && lc.name_en !== undefined);
       localStorage.setItem('local_pending_candles', JSON.stringify(localCandles));
       
       // Добавляем оставшиеся локальные в начало массива для отображения
@@ -1366,7 +1434,7 @@ function initializeMemorialApp() {
   if (adminParam && btoa(adminParam) === 'MTk3OA==') {
     document.getElementById('adminPanel').style.display = 'flex';
     if (!document.body.classList.contains('admin-mode')) toggleAdmin();
-    showToast(currentLang === 'ua' ? 'Режим редактора увімкнено через посилання!' : 'Режим редактора включен по ссылке!');
+    showToast(getT('Режим редактора увімкнено через посилання!', 'Editor mode enabled via link!', 'Режим редактора включен по ссылке!'));
   }
 
   const pwdInput = document.getElementById('adminPwdInput');
@@ -1404,7 +1472,7 @@ function initializeMemorialApp() {
             document.getElementById(currentUploadId).src = blobUrl;
             hasUnsavedChanges = true;
 
-            customConfirm(currentLang === 'ua' ? 'Фото оптимізовано! Завантажити його одразу на GitHub?' : 'Фото оптимизировано! Загрузить его сразу на GitHub?', () => {
+            customConfirm(getT('Фото оптимізовано! Завантажити його одразу на GitHub?', 'Photo optimized! Upload it directly to GitHub?', 'Фото оптимизировано! Загрузить его сразу на GitHub?'), () => {
               uploadImageToGitHub(blob, 'img/' + currentUploadId + '.webp');
             });
           }, 'image/webp', 0.85);
@@ -1438,14 +1506,12 @@ async function uploadImageToGitHub(blob, filename) {
   let ghToken = localStorage.getItem('gh_token');
 
   if (!ghToken) {
-    alert(currentLang === 'ua' 
-      ? "Будь ласка, вкажіть GitHub Token у Налаштуваннях (кнопка ⚙️ Налаштування в адмінці)." 
-      : "Пожалуйста, укажите GitHub Token в Настройках (кнопка ⚙️ Настройки в админке).");
+    alert(getT('Будь ласка, вкажіть GitHub Token у Налаштуваннях (кнопка ⚙️ Налаштування в адмінці).', 'Please provide the GitHub Token in the Settings (⚙️ Settings button in admin panel).', 'Пожалуйста, укажите GitHub Token в Настройках (кнопка ⚙️ Настройки в админке).'));
     openSettingsModal();
     return;
   }
 
-  showToast(currentLang === 'ua' ? 'Відправка фото на GitHub...' : 'Отправка фото на GitHub...');
+  showToast(getT('Відправка фото на GitHub...', 'Sending photo to GitHub...', 'Отправка фото на GitHub...'));
 
   const reader = new FileReader();
   reader.readAsDataURL(blob);
@@ -1475,7 +1541,7 @@ async function uploadImageToGitHub(blob, filename) {
       if (!putRes.ok) throw new Error('Ошибка записи в репозиторий');
 
       hasUnsavedChanges = false;
-      showToast(currentLang === 'ua' ? '✅ Фото успішно завантажено!' : '✅ Фото успешно загружено!');
+      showToast(getT('✅ Фото успішно завантажено!', '✅ Photo successfully uploaded!', '✅ Фото успешно загружено!'));
     } catch (error) {
       console.error(error);
       alert('Ошибка загрузки фото: ' + error.message);
