@@ -2786,39 +2786,20 @@ body:has(.bio-modal.active) {
     margin: 0;
   }
 }
-/* --- INLINE VIDEO TRIGGER --- */
 .inline-video-trigger {
-  color: var(--accent);
+  color: inherit !important;
   cursor: pointer;
   text-decoration: underline;
-  text-decoration-style: dotted;
-  transition: color 0.3s ease;
-  position: relative;
+  text-decoration-color: var(--text-light); /* Subtle permanent underline */
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: color 0.4s ease, text-decoration-color 0.4s ease;
   display: inline;
 }
 
-.inline-video-trigger::after {
-  content: '▶';
-  font-size: 0.7em;
-  background: var(--accent);
-  color: #fff;
-  border-radius: 50%;
-  width: 14px;
-  height: 14px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding-left: 1px;
-  margin-left: 5px;
-  vertical-align: middle;
-}
-
 .inline-video-trigger:hover {
-  color: #e6b800;
-}
-
-.inline-video-trigger:hover::after {
-  background: #e6b800;
+  color: var(--gold) !important;
+  text-decoration-color: var(--gold);
 }
 
 /* --- NATIVE VIDEO MODAL --- */
