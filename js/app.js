@@ -1581,6 +1581,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const player = document.getElementById('videoPlayer');
   
   if (videoModal) {
+    const loader = document.getElementById('videoLoader');
+    if (player && loader) {
+      player.addEventListener('loadstart', () => loader.style.display = 'block');
+      player.addEventListener('waiting', () => loader.style.display = 'block');
+      player.addEventListener('canplay', () => loader.style.display = 'none');
+      player.addEventListener('playing', () => loader.style.display = 'none');
+    }
+
     videoModal.addEventListener('click', (e) => {
       const dialogDimensions = videoModal.getBoundingClientRect();
       if (
