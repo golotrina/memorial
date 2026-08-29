@@ -185,7 +185,7 @@ window.SITE_CONTENT = {
         "titleUa": "Разом назавжди",
         "isEpitaph": true,
         "textRu": "Жизнь прожита. И прожита достойно.\nВы шли вперёд, не ведая преград.\nУшли вы в вечность поступью спокойной,\nОставив свет, что в сердце навсегда.\nИ если жизнь – игра, а мы в ней лишь актёры,\nТо ваша роль звучит сквозь вечности просторы.",
-        "textEn": "Life has been lived. And lived with dignity.\nYou walked forward without knowing any obstacles.\nYou went into eternity with calm steps,\nLeaving the light that is in the heart forever.\nAnd if life is a game, and we are just actors in it,\nThen your role sounds across the vastness of eternity.",
+        "textEn": "A journey finished, walked with dignity,\nYou faced the world, from all hindrances free.\nYou gently stepped into the timeless space,\nAnd left a light no darkness can erase.\nIf life is a stage where we play a part,\nYour roles will resound in eternity's heart.",
         "textUa": "Життя прожито. Але як достойно...\nВи, як завжди, крокуючи вперед,\nПішли у вічність гордою ходою,\nПізнавши істини прихований секрет.\n\nНе серед нас - та завжди з нами:\nУ снах, у пам’яті, в думках.\nУ вічній любові та вдячності \nЗавжди залишаєтесь в наших серцях.\n\nВ цій грі Життя ми всі актори..."
       },
       {
@@ -195,9 +195,9 @@ window.SITE_CONTENT = {
         "titleRu": "Цифровое наследие",
         "titleEn": "Digital Legacy",
         "titleUa": "Цифровий спадок",
-        "textRu": "Род продолжается. \nГлубокое генеалогическое исследование (более 250 имен), подкрепленное ДНК-экспертизой и работой с международными архивами (MyHeritage), принимает форму. \n\nЯ прошла долгий путь – от поиска семейных корней до теплых, живых воспоминаний о родителях. \nЭтот Мемориал стал частью моего большого проекта – Цифрового Наследия (Digital Legacy), в который постепенно вплетаются ветви родных моей семьи. \n\nНо для меня это прежде всего место, где живут воспоминания о самых близких людях. \n\nЯ приглашаю вас – друзей, родных, всех, кто знал маму и папу – зажечь свою Свечу Памяти в этом месте, где не существует времени и расстояний.",
-        "textEn": "The family continues. \nIn-depth genealogical research (over 250 names), supported by DNA testing and work with international archives (MyHeritage), is taking shape. \n\nI have come a long way - from searching for family roots to warm, living memories of my parents. \nThis Memorial became part of my big project - Digital Legacy, into which branches of my family are gradually intertwined. \n\nBut for me, first of all, this is a place where memories of the closest people live. \n\nI invite you - friends, family, everyone who knew mom and dad - to light your Candle of Memory in this place where time and distances do not exist.",
-        "textUa": "Рід продовжується. \nГлибоке генеалогічне дослідження (понад 250 імен), підкріплене ДНК-експертизою та роботою з міжнародними архівами (MyHeritage), набуває форми. \n\nЯ пройшла довгий шлях – від пошуку сімейного коріння до теплих, живих спогадів про моїх батьків. \nЦей Меморіал став частиною мого великого проєкту – Цифрової Спадщини (Digital Legacy), у який поступово вплітаються гілки рідних моєї родини. \n\nАле для мене це насамперед місце, де живуть спогади про найближчих людей. \n\nЯ запрошую вас – друзів, рідних, усіх, хто знав маму та тата – запалити свою Свічку Пам'яті у цьому місці, де не існує часу та відстаней."
+        "textRu": "Род продолжается. \nГлубокое генеалогическое исследование (более 250 имен), <span class='inline-video-trigger' onclick='openVideoModal(\"media/tanya_dna_test.mp4\")'>подкрепленное ДНК-экспертизой и работой с международными архивами (MyHeritage)</span>, принимает форму. \n\nЯ прошла долгий путь – от поиска семейных корней до теплых, живых воспоминаний о родителях. \nЭтот Мемориал стал частью моего большого проекта – Цифрового Наследия (Digital Legacy), в который постепенно вплетаются ветви родных моей семьи. \n\nНо для меня это прежде всего место, где живут воспоминания о самых близких людях. \n\nЯ приглашаю вас – друзей, родных, всех, кто знал маму и папу – зажечь свою Свечу Памяти в этом месте, где не существует времени и расстояний.",
+        "textEn": "The family continues. \nIn-depth genealogical research (over 250 names), <span class='inline-video-trigger' onclick='openVideoModal(\"media/tanya_dna_test.mp4\")'>supported by DNA testing and work with international archives (MyHeritage)</span>, is taking shape. \n\nI have come a long way - from searching for family roots to warm, living memories of my parents. \nThis Memorial became part of my big project - Digital Legacy, into which branches of my family are gradually intertwined. \n\nBut for me, first of all, this is a place where memories of the closest people live. \n\nI invite you - friends, family, everyone who knew mom and dad - to light your Candle of Memory in this place where time and distances do not exist.",
+        "textUa": "Рід продовжується. \nГлибоке генеалогічне дослідження (понад 250 імен), <span class='inline-video-trigger' onclick='openVideoModal(\"media/tanya_dna_test.mp4\")'>підкріплене ДНК-експертизою та роботою з міжнародними архівами (MyHeritage)</span>, набуває форми. \n\nЯ пройшла довгий шлях – від пошуку сімейного коріння до теплих, живих спогадів про моїх батьків. \nЦей Меморіал став частиною мого великого проєкту – Цифрової Спадщини (Digital Legacy), у який поступово вплітаються гілки рідних моєї родини. \n\nАле для мене це насамперед місце, де живуть спогади про найближчих людей. \n\nЯ запрошую вас – друзів, рідних, усіх, хто знав маму та тата – запалити свою Свічку Пам'яті у цьому місці, де не існує часу та відстаней."
       }
     ]
   },
@@ -209,7 +209,7 @@ window.SITE_CONTENT = {
     "datesEn": "1945 – 2021",
     "datesUa": "1945 – 2021",
     "personalQuoteRu": "«Вся жизнь – игра, а люди в ней – актеры»",
-    "personalQuoteEn": "“All life is a game, and the people in it are actors”",
+    "personalQuoteEn": "“All the world's a stage, and all the men and women merely players.”",
     "personalQuoteUa": "«Життя – це гра, а люди в ній – актори»",
     "introRu": "Михаил Григорьевич родился в 1945 году в солнечной Евпатории Крыма. Для коллег он был выпускником театрально-художественного училища, заведующим постановочной частью Одесской филармонии и заслуженным деятелем эстрадного искусства Украины. А для меня он навсегда остался мудрым папой, которого я ласково называла Пундиком.",
     "introEn": "Mikhail Grigorievich was born in 1945 in sunny Evpatoria of Crimea. For his colleagues, he was a graduate of the theater and art school, the head of the production department of the Odessa Philharmonic and an honored figure in the pop art of Ukraine. And for me he forever remained a wise dad, whom I affectionately called Pundik.",
@@ -306,9 +306,9 @@ window.SITE_CONTENT = {
           "Главным вопросом, который родители часто мне задавали, был один: «Счастлива ли ты?» И сегодня я могу ответить спокойно и уверенно: да, папа – благодаря вам с мамой я счастлива."
         ],
         "paragraphsEn": [
-          "He was wise. I will never forget how he passed on to me the philosophy of life: all life is a game, and the people in it are actors. And what deep, beautiful toasts he said at my wedding. And then he took his grandchildren to New Year's matinees at the Philharmonic, arranged them for kindergarten and school.",
+          "He was wise. I will never forget how he passed on to me the philosophy of life: all the world's a stage, and all the men and women merely players. And what deep, beautiful toasts he said at my wedding. And then he took his grandchildren to New Year's matinees at the Philharmonic, arranged them for kindergarten and school.",
           "His wisdom became a real compass for the future of his grandchildren. For many years he was friends with Sergei Pavlovich Belokonenko, director of the Odessa Higher Vocational School of Marine Tourism Services. The school was located opposite the Philharmonic. Dad sincerely admired this institution and its concept, often spoke about the importance of an early start - about the opportunity to get a prestigious profession after the ninth grade, start working and independently finance your further education and future.",
-          "And when the time came, I directed the children along this path. In 2022, my granddaughter entered this school without a doubt. And already in the summer of 2024, she completed an international internship as a bartender in Bulgaria, where by 2026 she went to work completely independently. Grandfather’s strategic vision became fateful for my son too - after the ninth grade, we consciously chose for him the vector of studying at an online college. This is how dad’s wisdom continues to live and be embodied in the successes of his grandchildren.",
+          "And when the time came, I directed the children along this path. In 2022, his granddaughter entered this school without a doubt. And already in the summer of 2024, she completed an international internship as a bartender in Bulgaria, where by 2026 she went to work completely independently. Grandfather’s strategic vision became fateful for his grandson too - after the ninth grade, we consciously chose for him the vector of studying at an online college. This is how dad’s wisdom continues to live and be embodied in the successes of his grandchildren.",
           "I remember how, in the crisis years of the 90s, this intelligent theatergoer took on hard work - laying parquet and polishing it with his polishing machine.",
           "The Philharmonic was everything to him. After retiring, he continued to work, but when, due to old age, he had to finally leave, he seemed to go out: he slept a lot and became weaker. Shortly before the coronavirus disease, I asked him: “Are you satisfied with your life?” Mom warned him that he would cry, and tears actually began to shine in his eyes. He replied that yes, he was pleased.",
           "The parents died together, from Covid-19, in the same hospital, just three days apart. First dad, then mom...",
@@ -328,7 +328,7 @@ window.SITE_CONTENT = {
     "quotes": [
       {
         "textRu": "Вся жизнь – игра, а люди в ней – актеры.",
-        "textEn": "All life is a game, and the people in it are actors.",
+        "textEn": "All the world's a stage, and all the men and women merely players.",
         "textUa": "Життя – це гра, а люди в ній – актори.",
         "authorRu": "ЖИЗНЕННОЕ НАПУТСТВИЕ",
         "authorEn": "LIFE LEADING LEAD",
@@ -828,7 +828,7 @@ window.DB_GALLERIES = {
       "id": "gallery-f-4",
       "ru": "Слезы радости за дочь и внучку",
       "ua": "Сльози радості за доньку та онуку",
-      "en": "Tears of joy for my daughter and granddaughter"
+      "en": "Tears of joy for daughter and granddaughter"
     },
     {
       "id": "gallery-f-1779900727575",

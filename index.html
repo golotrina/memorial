@@ -244,7 +244,7 @@
     <div class="footer-content">
       <p class="footer-quote editable-text"
         data-ru="Бесконечно люблю.&#10;Бесконечно благодарю.&#10;Бесконечно прошу прощения.&#10;Ваша Таня (Tanya-Tango)."
-        data-ua="Безмежно люблю.&#10;Безмежно дякую.&#10;Безмежно прошу вибачення.&#10;Ваша Таня (Tanya-Tango)." data-en="I love infinitely.&#10;I thank infinitely.&#10;I ask for forgiveness infinitely.&#10;Yours, Tanya (Tanya-Tango)."
+        data-ua="Безмежно люблю.&#10;Безмежно дякую.&#10;Безмежно прошу вибачення.&#10;Ваша Таня (Tanya-Tango)." data-en="Forever loving you.&#10;Forever grateful.&#10;Forever sorry.&#10;Yours, Tanya (Tanya-Tango)."
         contenteditable="false">Безмежно люблю.&#10;Безмежно дякую.&#10;Безмежно прошу вибачення.&#10;Ваша Таня
         (Tanya-Tango).</p>
       <div class="footer-separator"></div>
@@ -456,6 +456,16 @@
       <div id="epoch-timeline-container" class="timeline modal-relative-z"></div>
     </div>
   </div>
+
+  <dialog id="videoModal" class="video-modal">
+    <div class="video-modal-content">
+      <span class="video-modal-close" onclick="closeVideoModal()">×</span>
+      <video id="videoPlayer" controls preload="none">
+        <source src="" type="video/mp4">
+        Ваш браузер не поддерживает видео.
+      </video>
+    </div>
+  </dialog>
 
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>

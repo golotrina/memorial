@@ -1548,3 +1548,57 @@ async function uploadImageToGitHub(blob, filename) {
     }
   };
 }
+
+// --- VIDEO MODAL LOGIC ---
+function openVideoModal(src) {
+  const modal = document.getElementById('videoModal');
+  const player = document.getElementById('videoPlayer');
+  const source = player.querySelector('source');
+  
+  if (modal && player && source) {
+    source.src = src;
+    player.volume = 0.3; // Звук на 50%
+    player.load(); // Reload the video with new source
+    modal.showModal();
+    player.play().catch(e => console.log('Auto-play prevented:', e));
+  }
+}
+
+function closeVideoModal() {
+  const modal = document.getElementById('videoModal');
+  const player = document.getElementById('videoPlayer');
+  
+  if (modal && player) {
+    player.pause();
+    player.currentTime = 0;
+    modal.close();
+  }
+}
+
+// Close video modal on click outside and escape key
+document.addEventListener('DOMContentLoaded', () => {
+  const videoModal = document.getElementById('videoModal');
+  const player = document.getElementById('videoPlayer');
+  
+  if (videoModal) {
+    videoModal.addEventListener('click', (e) => {
+      const dialogDimensions = videoModal.getBoundingClientRect();
+      if (
+        e.clientX < dialogDimensions.left ||
+        e.clientX > dialogDimensions.right ||
+        e.clientY < dialogDimensions.top ||
+        e.clientY > dialogDimensions.bottom
+      ) {
+        closeVideoModal();
+      }
+    });
+
+    // Native <dialog> triggers 'close' event when Escape is pressed
+    videoModal.addEventListener('close', () => {
+      if (player) {
+        player.pause();
+        player.currentTime = 0;
+      }
+    });
+  }
+});
